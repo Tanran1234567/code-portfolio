@@ -1,0 +1,14 @@
+extends: hosp_trajectories_v1_24h.yaml
+
+mixed_time:
+  enabled: true
+  max_history_hours: 168
+  max_nodes: 72
+  min_history_hours: 1
+  min_len: 2
+  stride_hours: 12
+
+state_text:
+  # diagnoses_icd is discharge-finalized and remains label-only.
+  exclude_categories:
+    - diagnosis

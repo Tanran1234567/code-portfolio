@@ -1,0 +1,74 @@
+# Clin-JEPA pretraining on hospital (admission-scoped) trajectories.
+# Differs from configs/train/pretrain_clin_jepa.yaml only in data paths,
+# window length, and min_length. Model / phase schedule unchanged.
+
+model:
+  base_model: Qwen/Qwen3-8B
+  checkpoint_dir: ${CLIN_JEPA_OUTPUT}/encoder_sft/final
+  attn_implementation: flash_attention_2
+  gradient_checkpointing: true
+  torch_dtype: bfloat16
+
+predictor:
+  state_dim: 4096
+  action_dim: 4096
+  static_dim: 4096
+  hidden_dim: 1024
+  num_layers: 6
+  num_heads: 8
+  ffn_dim: 4096
+  # Hospital windows are at most t_max=28 bins (7 days at 6h). Keep 72 so an
+  # ICU-pretrained predictor checkpoint still loads without resize.
+  max_timesteps: 72
+  ffn_dropout: 0.15
+  attn_dropout: 0.1
+  prediction_mode: absolute
+
+data:
+  # Absolute path; override CLIN_JEPA_HOSP_DATA if you relocate the root.
+  train_dir: /home/zhoujiale/clin_jepa_hosp_data/trajectories
+  val_dir:   /home/zhoujiale/clin_jepa_hosp_data/trajectories
+  max_seq_len: 4096
+  # Hospital step06 min_len=4 bins (=24h). ICU default in the dataset class is 6.
+  min_length: 4
+
+training:
+  lr_encoder: 5.0e-5
+  lr_predictor: 5.0e-4
+  weight_decay: 0.04
+
+  per_gpu_batch_size: 8
+  grad_accum: 2
+
+  warmup_ratio: 0.02
+  seed: 42
+
+  gradient_clip_encoder: 0.5
+  gradient_clip_predictor: 1.0
+  rollout_horizon: 2
+
+  phases:
+    phase_1_steps:  3072
+    phase_2a_steps: 3072
+    phase_2b_steps: 1024
+    phase_4_steps:  4608
+
+  ema:
+    tau_phase_2a: 0.996
+    tau_phase_2b: 0.996
+    target_precision: float32
+
+logging:
+  log_every: 25
+  eval_every: 200
+  eval_max_windows: 200
+  val_windows: 1000
+
+save:
+  dir: ${CLIN_JEPA_OUTPUT}/clin_jepa_pretrain_hosp
+  save_best: true
+  save_final: true
+
+hf:
+  cache_dir: ${HF_HOME}
+  offline: true

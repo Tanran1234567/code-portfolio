@@ -1,0 +1,24 @@
+{
+  "purpose": "测试 Orchestrator 在第一阶段得到单个子任务后，是否能把该子任务拆成完成它所需的多步骤计划。",
+  "important_distinction_from_previous_dataset": "上一版测试顶层子查询之间能否拆分，并要求拆分后的子查询互相独立；本版输入已经是单个子任务，步骤之间允许存在依赖，重点测试计划分解。",
+  "design_principles": [
+    "input_subtask 视为已经拆好的单个子任务，不再判断顶层是否可拆。",
+    "expected_steps 允许且经常包含依赖，depends_on 表示数据流。",
+    "标准答案是可执行步骤计划，而不是最终事实答案。",
+    "覆盖线性桥接、多路并行查询后比较、fan-out 汇总、条件分支、表格处理、数学计算、代码排障、文档规则匹配和开放式调研。",
+    "题面为合成中文，不直接搬运公开基准题面；结构借鉴公开论文/数据集。"
+  ],
+  "schema_fields": {
+    "id": "样本ID",
+    "stage": "固定为 subtask_to_steps",
+    "input_subtask": "待拆解的单个子任务",
+    "category": "任务类型",
+    "source_style": "借鉴的数据集/论文风格，不表示原题来源",
+    "plan_complexity": "步骤结构类型",
+    "requires_external_info": "是否需要外部资料或工具",
+    "expected_step_count": "期望步骤数",
+    "expected_steps": "标准步骤计划，包含 step_id/instruction/operation/expected_output_var/depends_on",
+    "tools_expected": "预期会用到的工具类型",
+    "scoring_focus": "评分时关注点"
+  }
+}

@@ -1,0 +1,14 @@
+extends: hosp_paths_v1_24h.yaml
+
+duckdb:
+  temp_directory: /home/zhoujiale/clin_jepa_hosp_data_v1_mixed/_duckdb_tmp
+
+output:
+  root: /home/zhoujiale/clin_jepa_hosp_data_v1_mixed
+  # Reuse the frozen 3k cohort and patient-level split.
+  cohort: /home/zhoujiale/clin_jepa_hosp_data_v1_24h/cohort
+  splits: /home/zhoujiale/clin_jepa_hosp_data_v1_24h/splits
+  observations: /home/zhoujiale/clin_jepa_hosp_data_v1_mixed/observations
+  actions: /home/zhoujiale/clin_jepa_hosp_data_v1_mixed/actions
+  discretized: /home/zhoujiale/clin_jepa_hosp_data_v1_mixed/discretized
+  trajectories: /home/zhoujiale/clin_jepa_hosp_data_v1_mixed/trajectories

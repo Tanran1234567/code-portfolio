@@ -1,0 +1,56 @@
+---
+nacos:
+  dev:
+    host: "127.0.0.1"
+    port: 31161
+    namespace: "YOUR_NAMESPACE"
+    username: "YOUR_USERNAME"
+  test:
+    host: "localhost"
+    port: 8848
+    namespace: "YOUR_NAMESPACE"
+    username: "YOUR_USERNAME"
+  prod:
+    host: "localhost"
+    port: 8848
+    namespace: "YOUR_NAMESPACE"
+    username: "YOUR_USERNAME"
+
+task-mgr:
+  dev:
+    host: "127.0.0.1"
+    port: 27017
+    username: "YOUR_USERNAME"
+  test:
+    host: "127.0.0.1"
+    port: 27017
+    username: "YOUR_USERNAME"
+  prod:
+    host: "127.0.0.1"
+    port: 27017
+    username: "YOUR_USERNAME"
+
+opensearch:
+  dev:
+    host: "127.0.0.1"
+    port: 30940
+    username: "YOUR_USERNAME"
+  test:
+    host: "127.0.0.1"
+    port: 32745
+    username: "YOUR_USERNAME"
+  prod:
+    host: "127.0.0.1"
+    port: 31546
+    username: "YOUR_USERNAME"
+
+milvus:
+  dev:
+    host: "127.0.0.1"
+    port: 30230
+  test:
+    host: "127.0.0.1"
+    port: 30230
+  prod:
+    host: ""
+    port: 9200

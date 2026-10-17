@@ -1,0 +1,20 @@
+extends: hosp_trajectories_v1_24h.yaml
+
+bin_hours: 24
+t_max: 30
+min_len: 4
+stride: 30
+model_time_reference: end
+shard_size: 3000
+n_workers: 4
+
+state_text:
+  include_machine_context: false
+  exclude_categories: [diagnosis, care_setting]
+  exclude_variables: [sofa_24hours_max, creat_low_past_7day, creat_low_past_48hr]
+
+classification_targets:
+  - name: label_creatinine_class
+    source_label: label_creatinine
+    threshold: 1.5
+    class_names: [HIGH, NOT_HIGH, NOT_MEASURED]

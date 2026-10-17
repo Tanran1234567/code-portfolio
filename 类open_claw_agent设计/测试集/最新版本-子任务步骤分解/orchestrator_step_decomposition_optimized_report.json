@@ -1,0 +1,44 @@
+{
+  "total_original": 5000,
+  "total_optimized": 2000,
+  "original_level_counts": {
+    "complex": 1000,
+    "simple": 2500,
+    "autonomy": 500,
+    "direct": 500,
+    "branch": 500
+  },
+  "removed_level_counts": {
+    "simple": 2500,
+    "direct": 500
+  },
+  "relabel_counts": {
+    "complex->autonomy": 500
+  },
+  "final_level_counts": {
+    "complex": 500,
+    "autonomy": 1000,
+    "branch": 500
+  },
+  "contains_direct_or_simple": false,
+  "mismatched_expected_step_count": [],
+  "category_level_before": {
+    "('fanout_rank_aggregate', 'complex')": 500,
+    "('bridge_entity_lookup', 'simple')": 500,
+    "('research_synthesis_plan', 'autonomy')": 500,
+    "('attribute_comparison', 'simple')": 500,
+    "('code_debug_plan', 'complex')": 500,
+    "('multi_step_arithmetic', 'direct')": 500,
+    "('conditional_metric_decision', 'branch')": 500,
+    "('document_policy_reasoning', 'simple')": 500,
+    "('table_analysis_pipeline', 'simple')": 500,
+    "('temporal_adjacent_comparison', 'simple')": 500
+  },
+  "category_level_after": {
+    "('fanout_rank_aggregate', 'complex')": 500,
+    "('research_synthesis_plan', 'autonomy')": 500,
+    "('code_debug_plan', 'autonomy')": 500,
+    "('conditional_metric_decision', 'branch')": 500
+  },
+  "output_file": "/mnt/data/orchestrator_step_decomposition_optimized_no_direct_simple.jsonl"
+}

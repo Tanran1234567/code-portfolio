@@ -1,0 +1,34 @@
+# Hospital (inpatient) cohort definition.
+#
+# ICU counterpart: configs/data/cohort.yaml, which selects the first ICU stay
+# per patient with LOS >= 6h. The hospital analogue keeps the same spirit
+# (adults, a stay long enough to contain a trajectory) but the unit of
+# analysis is the hospital admission (hadm_id), anchored at admittime.
+
+inclusion:
+  min_age: 18
+
+exclusion:
+  # A 24h floor rather than the ICU pipeline's 6h: at a 6-hour bin width,
+  # 24h is the 4-step minimum window length (see hosp_trajectories.yaml
+  # min_len). Shorter admissions cannot form a trajectory.
+  min_los_hours: 24
+
+  # Admissions with no lab result at all cannot produce a usable state
+  # sequence. labevents covers ~92.8% of the age/LOS-filtered cohort.
+  require_any_lab: true
+  min_obs_events: 4
+
+  # Keep every admission per patient (unlike the ICU pipeline's
+  # keep_first_icu_stay_only). Repeat admissions are the signal a
+  # hospital-scope world model should learn; leakage is controlled by the
+  # patient-level split in step05 instead.
+  keep_first_admission_only: false
+
+# Truncation cap, mirroring the ICU pipeline's 336h (14 days).
+max_los_hours: 336
+
+labels:
+  # Stay-level binary outcomes written into the trajectory shards.
+  prolonged_stay_hours: 168      # >7 days, same threshold as the ICU pipeline
+  mortality_windows_days: [30, 90]

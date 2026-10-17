@@ -1,0 +1,9 @@
+FROM iassistant-base:py3.12
+
+WORKDIR /app
+COPY pyproject.toml .
+RUN uv sync --upgrade
+
+COPY . .
+
+ENV USER=root

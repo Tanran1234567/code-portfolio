@@ -1,0 +1,61 @@
+model:
+  base_model: ${QWEN_PATH}
+  lora:
+    r: 16
+    alpha: 32
+    target_modules: [q_proj, k_proj, v_proj, o_proj]
+    dropout: 0.05
+    bias: none
+    task_type: CAUSAL_LM
+  attn_implementation: flash_attention_2
+  gradient_checkpointing: true
+  torch_dtype: bfloat16
+
+data:
+  train_dir: ${CREATININE_WARD_DATA_ROOT}/trajectories/train
+  val_dir: ${CREATININE_WARD_DATA_ROOT}/trajectories/val
+  max_seq_len: 4096
+  val_max_samples: 5000
+  skip_empty: true
+  lazy_shards: true
+  no_action_sft_fraction: 0.10
+
+training:
+  # The original paper used one epoch on ~197K trajectory windows. This
+  # 3000-patient pilot is much smaller, so allow repeated optimization but
+  # select by held-out validation loss rather than blindly using epoch 10.
+  epochs: 10
+  lr: 1.0e-4
+  weight_decay: 0.01
+  warmup_ratio: 0.03
+  scheduler: cosine
+  final_lr_ratio: 0.0
+  gradient_clip: 1.0
+  token_budget: 16384
+  max_batch_size: 128
+  icu_frac: 0.0
+  state_fraction: 0.5
+  no_action_fraction_within_action: 0.10
+  precision: bf16
+  seed: 42
+
+logging:
+  log_every: 20
+  eval_every: 100
+  eval_max_batches: 100
+  checkpoint_every: 100
+
+early_stopping:
+  enabled: true
+  patience: 4
+  min_delta_relative: 0.01
+  monitor: val_combined_loss
+
+save:
+  dir: ${CREATININE_WARD_OUTPUT}/encoder_sft
+  save_best: true
+  save_final: true
+
+hf:
+  cache_dir: ${HF_HOME}
+  offline: true

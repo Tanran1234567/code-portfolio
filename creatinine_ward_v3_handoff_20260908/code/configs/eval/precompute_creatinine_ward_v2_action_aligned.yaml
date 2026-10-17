@@ -1,0 +1,24 @@
+model:
+  base_model: ${QWEN_PATH}
+  attn_implementation: flash_attention_2
+  gradient_checkpointing: false
+  torch_dtype: bfloat16
+
+data:
+  trajectory_dir: ${CREATININE_WARD_DATA_ROOT}/trajectories
+  max_seq_len: 4096
+
+inference:
+  embedding_dtype: float16
+
+output:
+  schema_version: creatinine_ward_embeddings_v2_action_aligned
+
+hf:
+  cache_dir: ${HF_HOME}
+  offline: true
+
+plans:
+  jepa_v2:
+    checkpoint_dir: ${CREATININE_WARD_V2_OUTPUT}/clin_jepa/checkpoints/final/online
+    output_dir: ${CREATININE_WARD_V2_OUTPUT}/evaluation/embeddings/jepa

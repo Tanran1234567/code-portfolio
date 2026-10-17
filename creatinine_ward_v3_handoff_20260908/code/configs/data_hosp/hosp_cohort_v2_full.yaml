@@ -1,0 +1,19 @@
+# Full-MIMIC adult hospital cohort for MedIn v0.3.
+# No 3k subsample. Short stays are kept for Encoder SFT; predictor windows
+# still require >=3 timesteps after episode split.
+
+inclusion:
+  min_age: 18
+
+exclusion:
+  min_los_hours: 6
+  require_any_lab: true
+  min_obs_events: 1
+  keep_first_admission_only: false
+
+# 72 ward days = 1728h physical cap (one episode, T_max=72 at 24h).
+max_los_hours: 1728
+
+labels:
+  prolonged_stay_hours: 168
+  mortality_windows_days: [30, 90]

@@ -1,0 +1,60 @@
+evaluation:
+  context_hours: 24
+  horizons_hours: [1, 6, 12, 24, 48, 72, 168]
+  horizon_tolerance_hours: 0.51
+  min_context_fraction: 0.75
+  batch_size: 16
+  precision: bf16
+  bootstrap_replicates: 500
+  bootstrap_seed: 42
+  n_cases: 5
+  # Conditional dynamics is the primary task. Removed/shuffled are diagnostic
+  # ablations proving that the predictor uses the recorded intervention stream.
+  action_modes: [real, removed, shuffled]
+  mask_rates: [0.10, 0.20, 0.30]
+  mask_eval_max_windows: 2000
+  zstd_min: 0.05
+  zstd_max_samples: 5000
+  expected_windows:
+    val: null
+    test: null
+  max_windows: null
+  selection_manifest: ${MEDIN_OUTPUT}/evaluation/v2_unified/checkpoint_selection.json
+  data_verify_report: ${MEDIN_DATA_ROOT}/verify_v2_report.json
+
+selection:
+  candidates: [best, latest, final]
+  horizon_hours: 24
+  stratum: measured_sources_equal_weight
+  metric: balanced_measured_mase
+
+plans:
+  best:
+    embedding_dir: ${MEDIN_OUTPUT}/evaluation/v2_unified/embeddings/best
+    encoder_checkpoint: ${MEDIN_OUTPUT}/clin_jepa_v2_unified/checkpoints/best/online
+    predictor_checkpoint: ${MEDIN_OUTPUT}/clin_jepa_v2_unified/checkpoints/best/predictor.pt
+    output_dir: ${MEDIN_OUTPUT}/evaluation/v2_unified/results/best
+    model_config: &v2_predictor
+      state_dim: 4096
+      action_dim: 4096
+      static_dim: 4096
+      hidden_dim: 1024
+      num_layers: 6
+      num_heads: 8
+      ffn_dim: 4096
+      max_timesteps: 72
+      prediction_mode: absolute
+      use_continuous_time: false
+      absolute_time_additive: true
+  latest:
+    embedding_dir: ${MEDIN_OUTPUT}/evaluation/v2_unified/embeddings/latest
+    encoder_checkpoint: ${MEDIN_OUTPUT}/clin_jepa_v2_unified/checkpoints/latest/online
+    predictor_checkpoint: ${MEDIN_OUTPUT}/clin_jepa_v2_unified/checkpoints/latest/predictor.pt
+    output_dir: ${MEDIN_OUTPUT}/evaluation/v2_unified/results/latest
+    model_config: *v2_predictor
+  final:
+    embedding_dir: ${MEDIN_OUTPUT}/evaluation/v2_unified/embeddings/final
+    encoder_checkpoint: ${MEDIN_OUTPUT}/clin_jepa_v2_unified/checkpoints/final/online
+    predictor_checkpoint: ${MEDIN_OUTPUT}/clin_jepa_v2_unified/checkpoints/final/predictor.pt
+    output_dir: ${MEDIN_OUTPUT}/evaluation/v2_unified/results/final
+    model_config: *v2_predictor

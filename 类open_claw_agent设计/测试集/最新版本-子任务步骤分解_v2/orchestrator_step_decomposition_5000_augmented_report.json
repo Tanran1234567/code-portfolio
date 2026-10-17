@@ -1,0 +1,34 @@
+{
+  "source_file": "orchestrator_step_decomposition_optimized_no_direct_simple.jsonl",
+  "output_file": "orchestrator_step_decomposition_5000_augmented_cba.jsonl",
+  "original_count": 2000,
+  "added_count": 3000,
+  "final_count": 5000,
+  "level_counts": {
+    "complex": 1500,
+    "autonomy": 2000,
+    "branch": 1500
+  },
+  "category_counts": {
+    "fanout_rank_aggregate": 834,
+    "research_synthesis_plan": 675,
+    "code_debug_plan": 674,
+    "conditional_metric_decision": 1000,
+    "explicit_compare_pipeline": 333,
+    "explicit_time_series_analysis": 333,
+    "incident_diagnosis_plan": 161,
+    "strategy_execution_plan": 166,
+    "system_reliability_plan": 165,
+    "growth_diagnosis_plan": 159,
+    "parallel_branch_routing": 500
+  },
+  "removed_levels_still_present": {
+    "direct": 0,
+    "simple": 0
+  },
+  "augmentation_strategy": {
+    "complex": "新增1000条，覆盖显式排序汇总、显式多维对比、显式时间序列分析，强调题面已给出先后处理骨架。",
+    "autonomy": "新增1000条，覆盖开放式调研/方案、故障排查/稳定性诊断，强调题面简单但需要自主规划和迭代验证。",
+    "branch": "新增1000条，覆盖单条件阈值分支、双条件并行分支和多出口路由。"
+  }
+}

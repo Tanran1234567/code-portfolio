@@ -1,0 +1,77 @@
+{
+  "total": 5000,
+  "category_distribution": {
+    "fanout_rank_aggregate": 500,
+    "bridge_entity_lookup": 500,
+    "research_synthesis_plan": 500,
+    "attribute_comparison": 500,
+    "code_debug_plan": 500,
+    "multi_step_arithmetic": 500,
+    "conditional_metric_decision": 500,
+    "document_policy_reasoning": 500,
+    "table_analysis_pipeline": 500,
+    "temporal_adjacent_comparison": 500
+  },
+  "complexity_distribution": {
+    "fanout_multi_document": 500,
+    "linear_3_hop": 500,
+    "open_ended_research_plan": 500,
+    "parallel_lookup_normalize_compare": 500,
+    "diagnose_patch_verify": 500,
+    "arithmetic_chain": 500,
+    "branch_after_lookup": 500,
+    "retrieve_extract_match_decide": 500,
+    "data_pipeline": 500,
+    "parallel_lookup_then_compare": 500
+  },
+  "step_count_distribution": {
+    "4": 1000,
+    "5": 3000,
+    "6": 1000
+  },
+  "requires_external_info_distribution": {
+    "True": 3000,
+    "False": 2000
+  },
+  "operation_distribution": {
+    "format_answer": 4000,
+    "lookup": 3000,
+    "calculate": 1500,
+    "normalize": 1000,
+    "synthesize": 1000,
+    "compare": 1000,
+    "search_or_select_entities": 500,
+    "fanout_lookup": 500,
+    "sort": 500,
+    "lookup_or_normalize": 500,
+    "clarify_requirements": 500,
+    "search": 500,
+    "extract_evidence": 500,
+    "write_output": 500,
+    "verify_and_finalize": 500,
+    "collect_context": 500,
+    "trace_code": 500,
+    "reproduce": 500,
+    "patch": 500,
+    "verify": 500,
+    "parse_numbers": 500,
+    "parse_condition": 500,
+    "lookup_or_compute_metric": 500,
+    "condition_eval": 500,
+    "branch_action": 500,
+    "document_retrieval": 500,
+    "fact_extraction": 500,
+    "rule_matching": 500,
+    "decision": 500,
+    "inspect_schema": 500,
+    "filter_data": 500,
+    "aggregate": 500,
+    "sort_and_select": 500
+  },
+  "files": {
+    "jsonl": "/mnt/data/orchestrator_step_decomposition_5000_v3.jsonl",
+    "representative_json": "/mnt/data/orchestrator_step_decomposition_representative_v3.json",
+    "representative_md": "/mnt/data/orchestrator_step_decomposition_representative_v3.md",
+    "design_notes": "/mnt/data/orchestrator_step_decomposition_design_notes_v3.json"
+  }
+}

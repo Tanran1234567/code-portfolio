@@ -1,0 +1,47 @@
+# Trajectory windowing for hospital v1 @ 24h bins.
+#
+# Physical analogue of the 6h config (t_max=28→7d, min_len=4→24h, stride=4→24h):
+#            bins   hours   days
+#   t_max       7     168      7
+#   min_len     2      48      2   # need ≥2 bins for JEPA dynamics at daily resolution
+#   stride      1      24      1
+#   max_steps  14     336     14
+
+input_dir: discretized
+splits_path: splits/splits.csv
+output_dir: trajectories
+
+bin_hours: 24
+
+t_max: 7
+min_len: 2
+stride: 1
+
+shard_size: 2000
+n_workers: 4
+
+state_text:
+  exclude_categories:
+    - diagnosis
+  exclude_variables:
+    - sofa_24hours_max
+    - creat_low_past_7day
+    - creat_low_past_48hr
+
+label_targets:
+  - {name: label_creatinine,      variable_name: creatinine,       source_table: chemistry,            agg: last}
+  - {name: label_bun,             variable_name: bun,              source_table: chemistry,            agg: last}
+  - {name: label_sodium,          variable_name: sodium,           source_table: chemistry,            agg: last}
+  - {name: label_potassium,       variable_name: potassium,        source_table: chemistry,            agg: last}
+  - {name: label_bicarbonate,     variable_name: bicarbonate,      source_table: chemistry,            agg: last}
+  - {name: label_aniongap,        variable_name: aniongap,         source_table: chemistry,            agg: last}
+  - {name: label_glucose,         variable_name: glucose,          source_table: chemistry,            agg: last}
+  - {name: label_albumin,         variable_name: albumin,          source_table: chemistry,            agg: last}
+  - {name: label_hemoglobin,      variable_name: hemoglobin,       source_table: complete_blood_count, agg: last}
+  - {name: label_hematocrit,      variable_name: hematocrit,       source_table: complete_blood_count, agg: last}
+  - {name: label_wbc,             variable_name: wbc,              source_table: complete_blood_count, agg: last}
+  - {name: label_platelet,        variable_name: platelet,         source_table: complete_blood_count, agg: last}
+  - {name: label_inr,             variable_name: inr,              source_table: coagulation,          agg: last}
+  - {name: label_bilirubin_total, variable_name: bilirubin_total,  source_table: enzyme,               agg: last}
+  - {name: label_lactate,         variable_name: lactate,          source_table: bg,                   agg: last}
+  - {name: label_sbp,             variable_name: sbp,              source_table: omr,                  agg: last}

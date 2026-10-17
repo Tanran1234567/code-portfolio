@@ -1,0 +1,52 @@
+# Unified Encoder SFT from scratch (paper §3.1): fresh LoRA on frozen Qwen3-8B.
+# Do NOT set initial_adapter — that would be ICU warm-start.
+model:
+  base_model: ${QWEN_PATH}
+  lora:
+    r: 16
+    alpha: 32
+    target_modules: ["q_proj", "k_proj", "v_proj", "o_proj"]
+    dropout: 0.05
+    bias: none
+  attn_implementation: flash_attention_2
+  gradient_checkpointing: true
+  torch_dtype: bfloat16
+
+data:
+  train_dir: ${MEDIN_DATA_ROOT}/trajectories_episode/train
+  val_dir: ${MEDIN_DATA_ROOT}/trajectories_episode/val
+  max_seq_len: 4096
+  val_max_samples: 5000
+  skip_empty: true
+  lazy_shards: true
+  # Canonical NO_ACTION is learned, but repeated empty-action text is capped.
+  no_action_sft_fraction: 0.10
+
+training:
+  epochs: 1
+  lr: 1.0e-4
+  weight_decay: 0.01
+  warmup_ratio: 0.03
+  gradient_clip: 1.0
+  token_budget: 32768
+  max_batch_size: 128
+  icu_frac: 0.5
+  state_fraction: 0.5
+  # Upper bound, not a quota. Never synthesize/oversample scarce NO_ACTION.
+  no_action_fraction_within_action: 0.10
+  precision: bf16
+  seed: 42
+
+logging:
+  log_every: 50
+  eval_every: 500
+  eval_max_batches: 50
+
+save:
+  dir: ${MEDIN_OUTPUT}/encoder_sft_v2_unified
+  save_best: true
+  save_final: true
+
+hf:
+  cache_dir: ${HF_HOME}
+  offline: true

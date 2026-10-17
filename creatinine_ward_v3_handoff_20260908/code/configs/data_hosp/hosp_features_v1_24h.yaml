@@ -1,0 +1,251 @@
+# Hospital features for v1 @ fixed 24h bins.
+# Content whitelist is identical to hosp_features.yaml; only temporal knobs change.
+#
+# Evidence (5k sample probe, 2026-08-02):
+#   raw lab+micro+chart @24h:     occ 79.9%, ev/bin 183.6  ← density_probe.md
+#   whitelist lab+micro+transfer: occ 81.4%, ev/bin  22.2  ← usable for encoder
+#   whitelist lab only:           occ 77.7%, ev/bin  21.3
+#
+# within_bin_agg=last collapses many same-variable repeats so state_text length
+# is bounded by #variables, not raw event count.
+
+temporal:
+  step_size_hours: 24
+  max_steps: 14              # 14 x 24h = 336h = 14 days (same physical cap as 6h×56)
+  min_obs_per_stay: 4
+  within_bin_agg: last
+
+observations:
+
+  lab_concepts:
+
+    chemistry:
+      category: labs
+      items:
+        50862: {name: albumin, unit: "g/dL", max: 10}
+        50930: {name: globulin, unit: "g/dL", max: 10}
+        50976: {name: total_protein, unit: "g/dL", max: 20}
+        50868: {name: aniongap, unit: "mEq/L", max: 10000, allow_zero: true}
+        50882: {name: bicarbonate, unit: "mEq/L", max: 10000}
+        51006: {name: bun, unit: "mg/dL", max: 300}
+        50893: {name: calcium, unit: "mg/dL", max: 10000}
+        50902: {name: chloride, unit: "mEq/L", max: 10000}
+        50912: {name: creatinine, unit: "mg/dL", max: 150}
+        50931: {name: glucose, unit: "mg/dL", max: 10000}
+        50983: {name: sodium, unit: "mEq/L", max: 200}
+        50971: {name: potassium, unit: "mEq/L", max: 30}
+
+    complete_blood_count:
+      category: labs
+      items:
+        51221: {name: hematocrit, unit: "%"}
+        51222: {name: hemoglobin, unit: "g/dL"}
+        51248: {name: mch, unit: "pg"}
+        51249: {name: mchc, unit: "%"}
+        51250: {name: mcv, unit: "fL"}
+        51265: {name: platelet, unit: "K/uL"}
+        51279: {name: rbc, unit: "m/uL"}
+        51277: {name: rdw, unit: "%"}
+        51301: {name: wbc, unit: "K/uL"}
+
+    coagulation:
+      category: labs
+      items:
+        51196: {name: d_dimer, unit: "ng/mL"}
+        51214: {name: fibrinogen, unit: "mg/dL"}
+        51237: {name: inr, unit: ""}
+        51274: {name: pt, unit: "sec"}
+        51275: {name: ptt, unit: "sec"}
+
+    enzyme:
+      category: labs
+      items:
+        50861: {name: alt, unit: "IU/L"}
+        50863: {name: alp, unit: "IU/L"}
+        50878: {name: ast, unit: "IU/L"}
+        50867: {name: amylase, unit: "IU/L"}
+        50885: {name: bilirubin_total, unit: "mg/dL"}
+        50883: {name: bilirubin_direct, unit: "mg/dL"}
+        50910: {name: ck_cpk, unit: "IU/L"}
+        50927: {name: ggt, unit: "IU/L"}
+        50954: {name: ld_ldh, unit: "IU/L"}
+
+    blood_differential:
+      category: labs
+      items:
+        51146: {name: basophils, unit: "%"}
+        51200: {name: eosinophils, unit: "%"}
+        51244: {name: lymphocytes, unit: "%"}
+        51254: {name: monocytes, unit: "%"}
+        51256: {name: neutrophils, unit: "%"}
+        51144: {name: bands, unit: "%"}
+
+    cardiac_marker:
+      category: labs
+      items:
+        51003: {name: troponin_t, unit: "ng/mL"}
+        50911: {name: ck_mb, unit: "ng/mL"}
+        50963: {name: ntprobnp, unit: "pg/mL"}
+
+    inflammation:
+      category: labs
+      items:
+        50889: {name: crp, unit: "mg/L"}
+
+    bg:
+      category: blood_gas
+      items:
+        50802: {name: baseexcess, unit: "mEq/L", allow_zero: true}
+        50804: {name: totalco2, unit: "mEq/L"}
+        50813: {name: lactate, unit: "mmol/L", max: 10000}
+        50816: {name: fio2, unit: "%", min: 20, max: 100}
+        50817: {name: so2, unit: "%", max: 100}
+        50818: {name: pco2, unit: "mmHg"}
+        50820: {name: ph, unit: ""}
+        50821: {name: po2, unit: "mmHg"}
+        50825: {name: temperature, unit: "C"}
+
+  omr:
+    enabled: true
+    category: vitals
+    pin_hour: 12
+    result_names:
+      "Blood Pressure":       {name: blood_pressure, unit: "mmHg", split_bp: true}
+      "Weight (Lbs)":         {name: weight, unit: "kg", scale: 0.45359237}
+      "BMI (kg/m2)":          {name: bmi, unit: "kg/m2"}
+      "Height (Inches)":      {name: height, unit: "cm", scale: 2.54}
+
+  microbiology:
+    enabled: true
+    category: microbiology
+    max_per_bin: 4
+
+  careunit:
+    enabled: true
+    category: care_setting
+    exclude_units: ["UNKNOWN", "Discharge Lounge"]
+
+  icu_concepts:
+    enabled: true
+    tables:
+      vitalsign:
+        category: vitals
+        join: stay_id
+        timestamp_col: charttime
+        value_cols: [heart_rate, sbp, dbp, mbp, resp_rate, temperature, spo2]
+      gcs:
+        category: assessment
+        join: stay_id
+        timestamp_col: charttime
+        value_cols: [gcs, gcs_motor, gcs_verbal, gcs_eyes]
+      urine_output:
+        category: output
+        join: stay_id
+        timestamp_col: charttime
+        value_cols: [urineoutput]
+      sofa:
+        category: score
+        join: stay_id
+        timestamp_col: endtime
+        value_cols: [sofa_24hours, respiration, coagulation, liver,
+                     cardiovascular, cns, renal]
+
+actions:
+
+  prescriptions:
+    enabled: true
+    category: medication_order
+    is_continuous: false
+    timestamp_col: starttime
+    end_col: stoptime
+    exclude_drug_patterns:
+      - "Vial"
+      - "Bag"
+      - "SW"
+      - "Solution"
+      - "Sterile Water"
+      - "Syringe%"
+      - "Iso-Osmotic%"
+      - "%Flush%"
+      - "D5W"
+      - "NS"
+      - "1/2 NS"
+    max_active_per_bin: 10
+
+  emar:
+    enabled: true
+    category: medication_admin
+    is_continuous: false
+    timestamp_col: charttime
+    keep_event_txt: ["Administered", "Started", "Restarted",
+                     "Administered in Other Location", "Delayed Administered"]
+    exclude_medication_patterns:
+      - "%Flush%"
+      - "Sterile Water"
+      - "Vial"
+      - "Bag"
+      - "SW"
+      - "D5W"
+      - "NS"
+    max_per_bin: 10
+
+  procedures_icd:
+    enabled: true
+    category: procedure
+    is_continuous: false
+    pin_hour: 12
+
+  antibiotic:
+    enabled: true
+    category: antibiotic
+    is_continuous: true
+    timestamp_col: starttime
+    end_col: stoptime
+
+  icu_concepts:
+    enabled: true
+    tables:
+      ventilation:
+        category: ventilation
+        join: stay_id
+        timestamp_col: starttime
+        end_col: endtime
+        is_continuous: true
+        value_cols: [ventilation_status]
+      vasoactive_agent:
+        category: vasopressor
+        join: stay_id
+        timestamp_col: starttime
+        end_col: endtime
+        is_continuous: true
+        value_cols: [norepinephrine, epinephrine, dopamine, dobutamine,
+                     phenylephrine, vasopressin, milrinone]
+      rrt:
+        category: dialysis
+        join: stay_id
+        timestamp_col: charttime
+        is_continuous: false
+        value_cols: [dialysis_active, dialysis_type]
+
+static:
+  fields: [admission_age, gender, race, charlson_comorbidity_index,
+           admission_type, admission_location, insurance]
+
+labels:
+  targets:
+    - {name: label_creatinine,      variable_name: creatinine,       source_table: chemistry,             agg: last}
+    - {name: label_bun,             variable_name: bun,              source_table: chemistry,             agg: last}
+    - {name: label_sodium,          variable_name: sodium,           source_table: chemistry,             agg: last}
+    - {name: label_potassium,       variable_name: potassium,        source_table: chemistry,             agg: last}
+    - {name: label_bicarbonate,     variable_name: bicarbonate,      source_table: chemistry,             agg: last}
+    - {name: label_aniongap,        variable_name: aniongap,         source_table: chemistry,             agg: last}
+    - {name: label_glucose,         variable_name: glucose,          source_table: chemistry,             agg: last}
+    - {name: label_albumin,         variable_name: albumin,          source_table: chemistry,             agg: last}
+    - {name: label_hemoglobin,      variable_name: hemoglobin,       source_table: complete_blood_count,  agg: last}
+    - {name: label_hematocrit,      variable_name: hematocrit,       source_table: complete_blood_count,  agg: last}
+    - {name: label_wbc,             variable_name: wbc,              source_table: complete_blood_count,  agg: last}
+    - {name: label_platelet,        variable_name: platelet,         source_table: complete_blood_count,  agg: last}
+    - {name: label_inr,             variable_name: inr,              source_table: coagulation,           agg: last}
+    - {name: label_bilirubin_total, variable_name: bilirubin_total,  source_table: enzyme,                agg: last}
+    - {name: label_lactate,         variable_name: lactate,          source_table: bg,                    agg: last}
+    - {name: label_sbp,             variable_name: sbp,              source_table: omr,                   agg: last}

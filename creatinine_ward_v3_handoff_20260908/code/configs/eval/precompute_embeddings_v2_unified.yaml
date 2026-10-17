@@ -1,0 +1,30 @@
+model:
+  base_model: ${QWEN_PATH}
+  attn_implementation: flash_attention_2
+  gradient_checkpointing: false
+  torch_dtype: bfloat16
+
+data:
+  trajectory_dir: ${MEDIN_DATA_ROOT}/trajectories_gap
+  max_seq_len: 4096
+
+inference:
+  embedding_dtype: float16
+
+output:
+  schema_version: medin_embeddings_v4_episode_time_no_action_text
+
+hf:
+  cache_dir: ${HF_HOME}
+  offline: true
+
+plans:
+  best:
+    checkpoint_dir: ${MEDIN_OUTPUT}/clin_jepa_v2_unified/checkpoints/best/online
+    output_dir: ${MEDIN_OUTPUT}/evaluation/v2_unified/embeddings/best
+  latest:
+    checkpoint_dir: ${MEDIN_OUTPUT}/clin_jepa_v2_unified/checkpoints/latest/online
+    output_dir: ${MEDIN_OUTPUT}/evaluation/v2_unified/embeddings/latest
+  final:
+    checkpoint_dir: ${MEDIN_OUTPUT}/clin_jepa_v2_unified/checkpoints/final/online
+    output_dir: ${MEDIN_OUTPUT}/evaluation/v2_unified/embeddings/final

@@ -1,0 +1,35 @@
+# Path resolution for the hospital (inpatient) Clin-JEPA pipeline.
+#
+# Unlike the ICU pipeline (configs/data/mimic_paths.yaml), which reads
+# mimic-code CSV exports, this variant reads MIMIC-IV directly from DuckDB
+# because no raw CSV download exists on this machine. See
+# reports/hosp_pipeline/ for the data inventory that motivated this.
+
+db:
+  # Raw MIMIC-IV v3.1: schemas mimiciv_hosp / mimiciv_icu / mimiciv_note
+  mimic: /data/general_disease_pred/mimic4.db
+  # mimic-code derived concepts (ICU-scoped: vitalsign, gcs, sofa, ...).
+  # Attached read-only as schema alias `derived`. Set to null to disable
+  # all ICU-concept enrichment.
+  derived: /data/backup/home/jiaxi/clin-jepa/data/mimiciv_derived.duckdb
+
+# DuckDB session tuning for the extraction queries.
+duckdb:
+  threads: 8
+  memory_limit: 24GB
+  temp_directory: /home/zhoujiale/clin_jepa_hosp_data/_duckdb_tmp
+
+output:
+  root: /home/zhoujiale/clin_jepa_hosp_data
+  cohort: /home/zhoujiale/clin_jepa_hosp_data/cohort
+  observations: /home/zhoujiale/clin_jepa_hosp_data/observations
+  actions: /home/zhoujiale/clin_jepa_hosp_data/actions
+  discretized: /home/zhoujiale/clin_jepa_hosp_data/discretized
+  splits: /home/zhoujiale/clin_jepa_hosp_data/splits
+  trajectories: /home/zhoujiale/clin_jepa_hosp_data/trajectories
+
+# Intermediate parquet is bucketed by hadm_id instead of one file per
+# admission: the hospital cohort is ~5x the ICU cohort, so 400k+ small
+# files would be a filesystem problem rather than a data problem.
+sharding:
+  n_buckets: 64

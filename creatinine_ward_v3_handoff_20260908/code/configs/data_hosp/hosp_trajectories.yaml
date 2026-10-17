@@ -1,0 +1,59 @@
+# Trajectory windowing for the hospital (inpatient) pipeline.
+#
+# All lengths are in BINS, not hours. With step_size_hours = 6 (see
+# hosp_features.yaml), one bin is 6 hours:
+#
+#            bins   hours   days
+#   t_max      28     168      7      window length
+#   min_len     4      24      1      shortest usable trajectory
+#   stride      4      24      1      sliding-window step
+#   max_steps  56     336     14      truncation cap (hosp_features.yaml)
+#
+# The ICU pipeline uses t_max=72 / min_len=6 / stride=12 at 1h bins, i.e. a
+# 3-day window stepped every 12h. A 7-day window is the hospital analogue:
+# median hospital LOS is 91h (15 bins), so most admissions still yield a
+# single window, while the LOS P90 (286h = 48 bins) yields ~6 windows.
+
+input_dir: discretized
+splits_path: splits/splits.csv
+output_dir: trajectories
+
+# Must match temporal.step_size_hours in hosp_features.yaml.
+bin_hours: 6
+
+t_max: 28
+min_len: 4
+stride: 4
+
+shard_size: 10000
+n_workers: 8
+
+state_text:
+  # Diagnoses are pinned to bin 0 and are the label source for downstream
+  # new-onset tasks, so they must not appear in the state text.
+  exclude_categories:
+    - diagnosis
+  exclude_variables:
+    # Derived fields that encode a future or whole-stay summary.
+    - sofa_24hours_max
+    - creat_low_past_7day
+    - creat_low_past_48hr
+
+# Must match the `labels.targets` block in hosp_features.yaml.
+label_targets:
+  - {name: label_creatinine,      variable_name: creatinine,       source_table: chemistry,            agg: last}
+  - {name: label_bun,             variable_name: bun,              source_table: chemistry,            agg: last}
+  - {name: label_sodium,          variable_name: sodium,           source_table: chemistry,            agg: last}
+  - {name: label_potassium,       variable_name: potassium,        source_table: chemistry,            agg: last}
+  - {name: label_bicarbonate,     variable_name: bicarbonate,      source_table: chemistry,            agg: last}
+  - {name: label_aniongap,        variable_name: aniongap,         source_table: chemistry,            agg: last}
+  - {name: label_glucose,         variable_name: glucose,          source_table: chemistry,            agg: last}
+  - {name: label_albumin,         variable_name: albumin,          source_table: chemistry,            agg: last}
+  - {name: label_hemoglobin,      variable_name: hemoglobin,       source_table: complete_blood_count, agg: last}
+  - {name: label_hematocrit,      variable_name: hematocrit,       source_table: complete_blood_count, agg: last}
+  - {name: label_wbc,             variable_name: wbc,              source_table: complete_blood_count, agg: last}
+  - {name: label_platelet,        variable_name: platelet,         source_table: complete_blood_count, agg: last}
+  - {name: label_inr,             variable_name: inr,              source_table: coagulation,          agg: last}
+  - {name: label_bilirubin_total, variable_name: bilirubin_total,  source_table: enzyme,               agg: last}
+  - {name: label_lactate,         variable_name: lactate,          source_table: bg,                   agg: last}
+  - {name: label_sbp,             variable_name: sbp,              source_table: omr,                  agg: last}

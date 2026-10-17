@@ -1,0 +1,78 @@
+# MedIn v0.3: one Qwen LoRA + one AC Transformer, absolute-time additive.
+model:
+  base_model: ${QWEN_PATH}
+  checkpoint_dir: ${MEDIN_OUTPUT}/encoder_sft_v2_unified/final
+  attn_implementation: flash_attention_2
+  gradient_checkpointing: true
+  torch_dtype: bfloat16
+
+predictor:
+  state_dim: 4096
+  action_dim: 4096
+  static_dim: 4096
+  hidden_dim: 1024
+  num_layers: 6
+  num_heads: 8
+  ffn_dim: 4096
+  max_timesteps: 72
+  ffn_dropout: 0.15
+  attn_dropout: 0.1
+  prediction_mode: absolute
+  use_continuous_time: false
+  absolute_time_additive: true
+  # Paper from-scratch: randomly initialize the AC Transformer.
+  # Do not point this at an ICU predictor.pt.
+  checkpoint: null
+
+data:
+  train_dir: ${MEDIN_DATA_ROOT}/trajectories_dense
+  val_dir: ${MEDIN_DATA_ROOT}/trajectories_dense
+  gap_train_dir: ${MEDIN_DATA_ROOT}/trajectories_gap
+  max_seq_len: 4096
+  min_length: 3
+
+training:
+  lr_encoder: 5.0e-5
+  lr_predictor: 5.0e-4
+  weight_decay: 0.04
+  # Preserve effective batch 64 on 4 GPUs while halving per-GPU activation peak.
+  per_gpu_batch_size: 1
+  grad_accum: 16
+  warmup_ratio: 0.02
+  seed: 42
+  gradient_clip_encoder: 0.5
+  gradient_clip_predictor: 1.0
+  icu_frac: 0.5
+  lambda_mask: 1.0
+  min_context: 2
+  max_gap_steps: 8
+  max_gaps_per_sequence: 2
+  mask_rates:
+    phase_2: 0.15
+    phase_3: 0.10
+    phase_5a: 0.20
+  phases:
+    phase_1_steps: 4000
+    phase_2_steps: 7000
+    phase_3_steps: 2000
+    phase_5a_steps: 4000
+    phase_5b_steps: 7000
+  ema:
+    tau_phase_2a: 0.996
+    tau_phase_2b: 0.996
+    target_precision: float32
+
+logging:
+  log_every: 10
+  eval_every: 500
+  eval_max_windows: 50
+  val_windows: 500
+
+save:
+  dir: ${MEDIN_OUTPUT}/clin_jepa_v2_unified
+  save_best: true
+  save_final: true
+
+hf:
+  cache_dir: ${HF_HOME}
+  offline: true

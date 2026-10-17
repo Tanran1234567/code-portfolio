@@ -1,0 +1,67 @@
+paths:
+  embeddings: ${CREATININE_WARD_V3_OUTPUT}/evaluation/embeddings/jepa_v3_text
+  predictor: ${CREATININE_WARD_V2_OUTPUT}/clin_jepa/checkpoints/final/predictor.pt
+  pretrain_config: configs/train/pretrain_creatinine_ward_v2_action_aligned.yaml
+  output: ${CREATININE_WARD_V3_OUTPUT}/evaluation/aki_v3_probe
+
+anchor:
+  # Fixed 72h history: current bucket plus the previous two 24h buckets.
+  min_anchor_idx: 2
+  context_steps: 3
+
+probe:
+  c_values: [0.0001, 0.001, 0.01, 0.1, 1.0]
+  max_iter: 3000
+  patient_equal_weight: true
+
+metrics:
+  bootstrap_replicates: 200
+  bootstrap_seed: 42
+
+targets:
+  # Diagnostic mixed task: any future 48h R1/R2, regardless of current class.
+  - name: future48_aki_binary
+    label_name: label_future48_scr_aki_rclass
+    task_type: binary
+    horizon_steps: 2
+    positive_classes: [1, 2]
+    exclude_classes: [3]
+    feature_kinds: [history, full48]
+    report_current_subsets:
+      incident_current_r0: {current: [0]}
+      persistent_current_aki: {current: [1, 2]}
+      current_ru: {current: [3]}
+
+  # Main task A: 48h SCr-AKI occurrence among current R0.
+  - name: future_48h_scr_aki_occurrence
+    label_name: label_future48_scr_aki_rclass
+    task_type: binary
+    horizon_steps: 2
+    require_current_classes: [0]
+    positive_classes: [1, 2]
+    exclude_classes: [3]
+    binary_class_names: [NO_OCCURRENCE, OCCURRENCE]
+    feature_kinds: [history, full48]
+
+  - name: worsening_future48_aki
+    label_name: label_future48_scr_aki_rclass
+    task_type: worsening
+    horizon_steps: 2
+    require_current_classes: [0, 1]
+    exclude_classes: [3]
+    feature_kinds: [history, full48]
+
+  - name: future48_rclass
+    label_name: label_future48_scr_aki_rclass
+    task_type: multiclass
+    horizon_steps: 2
+    class_names: [R0, R1, R2, RU]
+    feature_kinds: [history, full48]
+
+  - name: aki72_course_among_current_aki
+    label_name: label_aki72_course_class
+    task_type: multiclass
+    horizon_steps: 3
+    include_classes: [0, 1]
+    class_names: [RECOVERED, PERSISTENT_OR_WORSE, NOT_CURRENT_AKI, RU]
+    feature_kinds: [history, full72]

@@ -1,0 +1,20 @@
+extends: hosp_features_v1_24h.yaml
+
+temporal:
+  mode: mixed
+  ward_bin_hours: 24
+  icu_bin_hours: 1
+  min_obs_per_stay: 4
+  within_bin_agg: last
+
+observations:
+  # Admission-time context available in this local MIMIC build.
+  admission_context:
+    enabled: true
+
+  # Only diagnoses from admissions completed before the current admission.
+  # Current-admission discharge ICD codes remain category=diagnosis and are
+  # excluded from state_text.
+  prior_diagnoses:
+    enabled: true
+    max_codes: 20

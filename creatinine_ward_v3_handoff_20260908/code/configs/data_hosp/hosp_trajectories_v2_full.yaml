@@ -1,0 +1,23 @@
+extends: hosp_trajectories_v1_mixed.yaml
+
+state_text:
+  # v0.3 conditions on a numeric admission-time embedding. Do not leak an
+  # equivalent domain/resolution/delta-time channel through prose.
+  include_machine_context: false
+
+mixed_time:
+  enabled: true
+  max_history_hours: 1728
+  max_nodes: 72
+  min_history_hours: 1
+  min_len: 3
+  stride_hours: 12
+
+episode:
+  t_max: 72
+  min_len_predictor: 3
+  min_len_dense: 4
+  icu_stride_hours: 12
+  ward_stride_hours: 288
+  # Align ICU episodes with Clin-JEPA: drop stays shorter than 6 hours.
+  min_icu_hours: 6

@@ -1,0 +1,5028 @@
+{
+  "description": "每个查询级别100条子任务种子；最终查询级别在拆解后的 expected_subtasks 上标注。",
+  "level_definitions": {
+    "DIRECT": {
+      "id": 1,
+      "desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等"
+    },
+    "SIMPLE": {
+      "id": 2,
+      "desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用"
+    },
+    "BRANCH": {
+      "id": 3,
+      "desc": "L3-分支逻辑查询：如条件分支、并行分支等"
+    },
+    "COMPLEX": {
+      "id": 4,
+      "desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等"
+    },
+    "AUTONOMY": {
+      "id": 5,
+      "desc": "L5-全自主查询：如任务规划、递归循环、持续监控等"
+    }
+  },
+  "seed_count": 500,
+  "seeds": [
+    {
+      "seed_task_id": "SEED-DIR-001",
+      "text": "纠正这句话的错别字：“数据统记已经完成”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-002",
+      "text": "判断这句话的情感倾向：“数据统记已经完成”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-003",
+      "text": "把这句话压缩成20字以内：“数据统记已经完成”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-004",
+      "text": "先把这句话润色，再翻译成英文：“数据统记已经完成”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-005",
+      "text": "纠正这句话的错别字：“这个方案很有创意但是预算偏高”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-006",
+      "text": "判断这句话的情感倾向：“这个方案很有创意但是预算偏高”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-007",
+      "text": "把这句话压缩成20字以内：“这个方案很有创意但是预算偏高”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-008",
+      "text": "先把这句话润色，再翻译成英文：“这个方案很有创意但是预算偏高”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-009",
+      "text": "纠正这句话的错别字：“会议延期到周五下午三点”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-010",
+      "text": "判断这句话的情感倾向：“会议延期到周五下午三点”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-011",
+      "text": "把这句话压缩成20字以内：“会议延期到周五下午三点”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-012",
+      "text": "先把这句话润色，再翻译成英文：“会议延期到周五下午三点”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-013",
+      "text": "纠正这句话的错别字：“客户反馈页面加载速度太慢”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-014",
+      "text": "判断这句话的情感倾向：“客户反馈页面加载速度太慢”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-015",
+      "text": "把这句话压缩成20字以内：“客户反馈页面加载速度太慢”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-016",
+      "text": "先把这句话润色，再翻译成英文：“客户反馈页面加载速度太慢”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-017",
+      "text": "纠正这句话的错别字：“春天的公园里开满了花”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-018",
+      "text": "判断这句话的情感倾向：“春天的公园里开满了花”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-019",
+      "text": "把这句话压缩成20字以内：“春天的公园里开满了花”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-020",
+      "text": "先把这句话润色，再翻译成英文：“春天的公园里开满了花”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-021",
+      "text": "纠正这句话的错别字：“请在下周前提交项目总结”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-022",
+      "text": "判断这句话的情感倾向：“请在下周前提交项目总结”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-023",
+      "text": "把这句话压缩成20字以内：“请在下周前提交项目总结”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-024",
+      "text": "先把这句话润色，再翻译成英文：“请在下周前提交项目总结”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-025",
+      "text": "纠正这句话的错别字：“模型输出需要人工复核”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-026",
+      "text": "判断这句话的情感倾向：“模型输出需要人工复核”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-027",
+      "text": "把这句话压缩成20字以内：“模型输出需要人工复核”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-028",
+      "text": "先把这句话润色，再翻译成英文：“模型输出需要人工复核”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-029",
+      "text": "纠正这句话的错别字：“仓库库存低于安全线”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-030",
+      "text": "判断这句话的情感倾向：“仓库库存低于安全线”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-031",
+      "text": "把这句话压缩成20字以内：“仓库库存低于安全线”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-032",
+      "text": "先把这句话润色，再翻译成英文：“仓库库存低于安全线”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-033",
+      "text": "纠正这句话的错别字：“团队需要更清晰的目标”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-034",
+      "text": "判断这句话的情感倾向：“团队需要更清晰的目标”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-035",
+      "text": "把这句话压缩成20字以内：“团队需要更清晰的目标”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-036",
+      "text": "先把这句话润色，再翻译成英文：“团队需要更清晰的目标”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-037",
+      "text": "纠正这句话的错别字：“今天的风比昨天更大”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-038",
+      "text": "判断这句话的情感倾向：“今天的风比昨天更大”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-039",
+      "text": "把这句话压缩成20字以内：“今天的风比昨天更大”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-040",
+      "text": "先把这句话润色，再翻译成英文：“今天的风比昨天更大”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-041",
+      "text": "纠正这句话的错别字：“这份合同还缺少审批记录”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-042",
+      "text": "判断这句话的情感倾向：“这份合同还缺少审批记录”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-043",
+      "text": "把这句话压缩成20字以内：“这份合同还缺少审批记录”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-044",
+      "text": "先把这句话润色，再翻译成英文：“这份合同还缺少审批记录”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-045",
+      "text": "纠正这句话的错别字：“用户增长在周末明显放缓”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-046",
+      "text": "判断这句话的情感倾向：“用户增长在周末明显放缓”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-047",
+      "text": "把这句话压缩成20字以内：“用户增长在周末明显放缓”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-048",
+      "text": "先把这句话润色，再翻译成英文：“用户增长在周末明显放缓”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-049",
+      "text": "纠正这句话的错别字：“接口请求偶尔出现超时”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-050",
+      "text": "判断这句话的情感倾向：“接口请求偶尔出现超时”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-051",
+      "text": "把这句话压缩成20字以内：“接口请求偶尔出现超时”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-052",
+      "text": "先把这句话润色，再翻译成英文：“接口请求偶尔出现超时”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-053",
+      "text": "纠正这句话的错别字：“新版本上线后投诉减少”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-054",
+      "text": "判断这句话的情感倾向：“新版本上线后投诉减少”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-055",
+      "text": "把这句话压缩成20字以内：“新版本上线后投诉减少”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-056",
+      "text": "先把这句话润色，再翻译成英文：“新版本上线后投诉减少”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-057",
+      "text": "纠正这句话的错别字：“培训材料需要增加案例”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本纠错"
+    },
+    {
+      "seed_task_id": "SEED-DIR-058",
+      "text": "判断这句话的情感倾向：“培训材料需要增加案例”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "情感判断"
+    },
+    {
+      "seed_task_id": "SEED-DIR-059",
+      "text": "把这句话压缩成20字以内：“培训材料需要增加案例”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "文本压缩"
+    },
+    {
+      "seed_task_id": "SEED-DIR-060",
+      "text": "先把这句话润色，再翻译成英文：“培训材料需要增加案例”",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "润色后翻译"
+    },
+    {
+      "seed_task_id": "SEED-DIR-061",
+      "text": "计算12乘以7的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-062",
+      "text": "先计算12乘以7，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-063",
+      "text": "计算38乘以4的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-064",
+      "text": "先计算38乘以4，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-065",
+      "text": "计算125乘以8的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-066",
+      "text": "先计算125乘以8，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-067",
+      "text": "计算88乘以8的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-068",
+      "text": "先计算88乘以8，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-069",
+      "text": "计算256乘以3的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-070",
+      "text": "先计算256乘以3，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-071",
+      "text": "计算47乘以19的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-072",
+      "text": "先计算47乘以19，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-073",
+      "text": "计算63乘以11的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-074",
+      "text": "先计算63乘以11，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-075",
+      "text": "计算15乘以24的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-076",
+      "text": "先计算15乘以24，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-077",
+      "text": "计算144乘以5的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-078",
+      "text": "先计算144乘以5，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-079",
+      "text": "计算72乘以9的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-080",
+      "text": "先计算72乘以9，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-081",
+      "text": "计算31乘以26的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-082",
+      "text": "先计算31乘以26，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-083",
+      "text": "计算99乘以6的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-084",
+      "text": "先计算99乘以6，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-085",
+      "text": "计算18乘以17的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-086",
+      "text": "先计算18乘以17，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-087",
+      "text": "计算205乘以4的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-088",
+      "text": "先计算205乘以4，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-089",
+      "text": "计算57乘以13的结果",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "算术"
+    },
+    {
+      "seed_task_id": "SEED-DIR-090",
+      "text": "先计算57乘以13，再把结果写成一句完整中文",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "算术后表达"
+    },
+    {
+      "seed_task_id": "SEED-DIR-091",
+      "text": "把这些数字按从小到大排序：8、3、11、2、5",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "排序"
+    },
+    {
+      "seed_task_id": "SEED-DIR-092",
+      "text": "先把这些数字按从小到大排序，再指出中位数：8、3、11、2、5",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "排序后取中位数"
+    },
+    {
+      "seed_task_id": "SEED-DIR-093",
+      "text": "把这些数字按从小到大排序：42、7、19、3、28",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "排序"
+    },
+    {
+      "seed_task_id": "SEED-DIR-094",
+      "text": "先把这些数字按从小到大排序，再指出中位数：42、7、19、3、28",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "排序后取中位数"
+    },
+    {
+      "seed_task_id": "SEED-DIR-095",
+      "text": "把这些数字按从小到大排序：0.8、0.35、1.2、0.6",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "排序"
+    },
+    {
+      "seed_task_id": "SEED-DIR-096",
+      "text": "先把这些数字按从小到大排序，再指出中位数：0.8、0.35、1.2、0.6",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "排序后取中位数"
+    },
+    {
+      "seed_task_id": "SEED-DIR-097",
+      "text": "把这些数字按从小到大排序：16、4、9、1、25",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "排序"
+    },
+    {
+      "seed_task_id": "SEED-DIR-098",
+      "text": "先把这些数字按从小到大排序，再指出中位数：16、4、9、1、25",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "排序后取中位数"
+    },
+    {
+      "seed_task_id": "SEED-DIR-099",
+      "text": "把这些数字按从小到大排序：120、75、90、30、45",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "排序"
+    },
+    {
+      "seed_task_id": "SEED-DIR-100",
+      "text": "先把这些数字按从小到大排序，再指出中位数：120、75、90、30、45",
+      "query_level": "DIRECT",
+      "query_level_id": 1,
+      "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等",
+      "internal_dependency_type": "output_reference",
+      "contains_internal_dependency": true,
+      "topic": "排序后取中位数"
+    },
+    {
+      "seed_task_id": "SEED-SIM-001",
+      "text": "查询北京今天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-002",
+      "text": "查询北京今天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-003",
+      "text": "查询北京明天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-004",
+      "text": "查询北京明天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-005",
+      "text": "查询北京本周六的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-006",
+      "text": "查询北京本周六的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-007",
+      "text": "查询北京下周一的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-008",
+      "text": "查询北京下周一的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-009",
+      "text": "查询北京这个周末的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-010",
+      "text": "查询北京这个周末的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-011",
+      "text": "查询北京春节假期第一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-012",
+      "text": "查询北京春节假期第一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-013",
+      "text": "查询北京五一假期第一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-014",
+      "text": "查询北京五一假期第一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-015",
+      "text": "查询北京下周三的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-016",
+      "text": "查询北京下周三的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-017",
+      "text": "查询北京本月最后一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-018",
+      "text": "查询北京本月最后一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-019",
+      "text": "查询北京未来三天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-020",
+      "text": "查询北京未来三天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-021",
+      "text": "查询上海今天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-022",
+      "text": "查询上海今天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-023",
+      "text": "查询上海明天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-024",
+      "text": "查询上海明天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-025",
+      "text": "查询上海本周六的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-026",
+      "text": "查询上海本周六的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-027",
+      "text": "查询上海下周一的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-028",
+      "text": "查询上海下周一的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-029",
+      "text": "查询上海这个周末的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-030",
+      "text": "查询上海这个周末的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-031",
+      "text": "查询上海春节假期第一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-032",
+      "text": "查询上海春节假期第一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-033",
+      "text": "查询上海五一假期第一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-034",
+      "text": "查询上海五一假期第一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-035",
+      "text": "查询上海下周三的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-036",
+      "text": "查询上海下周三的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-037",
+      "text": "查询上海本月最后一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-038",
+      "text": "查询上海本月最后一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-039",
+      "text": "查询上海未来三天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-040",
+      "text": "查询上海未来三天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-041",
+      "text": "查询广州今天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-042",
+      "text": "查询广州今天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-043",
+      "text": "查询广州明天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-044",
+      "text": "查询广州明天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-045",
+      "text": "查询广州本周六的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-046",
+      "text": "查询广州本周六的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-047",
+      "text": "查询广州下周一的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-048",
+      "text": "查询广州下周一的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-049",
+      "text": "查询广州这个周末的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-050",
+      "text": "查询广州这个周末的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-051",
+      "text": "查询广州春节假期第一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-052",
+      "text": "查询广州春节假期第一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-053",
+      "text": "查询广州五一假期第一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-054",
+      "text": "查询广州五一假期第一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-055",
+      "text": "查询广州下周三的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-056",
+      "text": "查询广州下周三的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-057",
+      "text": "查询广州本月最后一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-058",
+      "text": "查询广州本月最后一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-059",
+      "text": "查询广州未来三天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-060",
+      "text": "查询广州未来三天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-061",
+      "text": "查询深圳今天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-062",
+      "text": "查询深圳今天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-063",
+      "text": "查询深圳明天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-064",
+      "text": "查询深圳明天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-065",
+      "text": "查询深圳本周六的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-066",
+      "text": "查询深圳本周六的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-067",
+      "text": "查询深圳下周一的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-068",
+      "text": "查询深圳下周一的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-069",
+      "text": "查询深圳这个周末的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-070",
+      "text": "查询深圳这个周末的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-071",
+      "text": "查询深圳春节假期第一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-072",
+      "text": "查询深圳春节假期第一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-073",
+      "text": "查询深圳五一假期第一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-074",
+      "text": "查询深圳五一假期第一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-075",
+      "text": "查询深圳下周三的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-076",
+      "text": "查询深圳下周三的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-077",
+      "text": "查询深圳本月最后一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-078",
+      "text": "查询深圳本月最后一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-079",
+      "text": "查询深圳未来三天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-080",
+      "text": "查询深圳未来三天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-081",
+      "text": "查询杭州今天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-082",
+      "text": "查询杭州今天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-083",
+      "text": "查询杭州明天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-084",
+      "text": "查询杭州明天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-085",
+      "text": "查询杭州本周六的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-086",
+      "text": "查询杭州本周六的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-087",
+      "text": "查询杭州下周一的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-088",
+      "text": "查询杭州下周一的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-089",
+      "text": "查询杭州这个周末的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-090",
+      "text": "查询杭州这个周末的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-091",
+      "text": "查询杭州春节假期第一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-092",
+      "text": "查询杭州春节假期第一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-093",
+      "text": "查询杭州五一假期第一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-094",
+      "text": "查询杭州五一假期第一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-095",
+      "text": "查询杭州下周三的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-096",
+      "text": "查询杭州下周三的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-097",
+      "text": "查询杭州本月最后一天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-098",
+      "text": "查询杭州本月最后一天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-SIM-099",
+      "text": "查询杭州未来三天的天气",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "none",
+      "contains_internal_dependency": false,
+      "topic": "天气查询"
+    },
+    {
+      "seed_task_id": "SEED-SIM-100",
+      "text": "查询杭州未来三天的天气，并根据天气给出穿衣建议",
+      "query_level": "SIMPLE",
+      "query_level_id": 2,
+      "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+      "internal_dependency_type": "causal_or_result_reference",
+      "contains_internal_dependency": true,
+      "topic": "天气到建议"
+    },
+    {
+      "seed_task_id": "SEED-BRA-001",
+      "text": "判断是否库存低于安全线，如果是就触发预警，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-002",
+      "text": "判断是否库存低于安全线，如果是就给出优化建议，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-003",
+      "text": "判断是否库存低于安全线，如果是就生成升级处理方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-004",
+      "text": "判断是否库存低于安全线，如果是就建议暂停上线，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-005",
+      "text": "判断是否库存低于安全线，如果是就输出复盘重点，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-006",
+      "text": "判断是否库存低于安全线，如果是就安排人工复核，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-007",
+      "text": "判断是否库存低于安全线，如果是就推荐扩容方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-008",
+      "text": "判断是否库存低于安全线，如果是就生成客服话术，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-009",
+      "text": "判断是否库存低于安全线，如果是就建议补充排班，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-010",
+      "text": "判断是否库存低于安全线，如果是就生成风险说明，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-011",
+      "text": "判断是否退款率高于5%，如果是就触发预警，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-012",
+      "text": "判断是否退款率高于5%，如果是就给出优化建议，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-013",
+      "text": "判断是否退款率高于5%，如果是就生成升级处理方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-014",
+      "text": "判断是否退款率高于5%，如果是就建议暂停上线，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-015",
+      "text": "判断是否退款率高于5%，如果是就输出复盘重点，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-016",
+      "text": "判断是否退款率高于5%，如果是就安排人工复核，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-017",
+      "text": "判断是否退款率高于5%，如果是就推荐扩容方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-018",
+      "text": "判断是否退款率高于5%，如果是就生成客服话术，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-019",
+      "text": "判断是否退款率高于5%，如果是就建议补充排班，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-020",
+      "text": "判断是否退款率高于5%，如果是就生成风险说明，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-021",
+      "text": "判断是否响应时长超过2小时，如果是就触发预警，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-022",
+      "text": "判断是否响应时长超过2小时，如果是就给出优化建议，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-023",
+      "text": "判断是否响应时长超过2小时，如果是就生成升级处理方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-024",
+      "text": "判断是否响应时长超过2小时，如果是就建议暂停上线，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-025",
+      "text": "判断是否响应时长超过2小时，如果是就输出复盘重点，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-026",
+      "text": "判断是否响应时长超过2小时，如果是就安排人工复核，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-027",
+      "text": "判断是否响应时长超过2小时，如果是就推荐扩容方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-028",
+      "text": "判断是否响应时长超过2小时，如果是就生成客服话术，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-029",
+      "text": "判断是否响应时长超过2小时，如果是就建议补充排班，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-030",
+      "text": "判断是否响应时长超过2小时，如果是就生成风险说明，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-031",
+      "text": "判断是否预算超出10%，如果是就触发预警，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-032",
+      "text": "判断是否预算超出10%，如果是就给出优化建议，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-033",
+      "text": "判断是否预算超出10%，如果是就生成升级处理方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-034",
+      "text": "判断是否预算超出10%，如果是就建议暂停上线，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-035",
+      "text": "判断是否预算超出10%，如果是就输出复盘重点，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-036",
+      "text": "判断是否预算超出10%，如果是就安排人工复核，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-037",
+      "text": "判断是否预算超出10%，如果是就推荐扩容方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-038",
+      "text": "判断是否预算超出10%，如果是就生成客服话术，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-039",
+      "text": "判断是否预算超出10%，如果是就建议补充排班，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-040",
+      "text": "判断是否预算超出10%，如果是就生成风险说明，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-041",
+      "text": "判断是否评分低于4分，如果是就触发预警，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-042",
+      "text": "判断是否评分低于4分，如果是就给出优化建议，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-043",
+      "text": "判断是否评分低于4分，如果是就生成升级处理方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-044",
+      "text": "判断是否评分低于4分，如果是就建议暂停上线，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-045",
+      "text": "判断是否评分低于4分，如果是就输出复盘重点，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-046",
+      "text": "判断是否评分低于4分，如果是就安排人工复核，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-047",
+      "text": "判断是否评分低于4分，如果是就推荐扩容方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-048",
+      "text": "判断是否评分低于4分，如果是就生成客服话术，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-049",
+      "text": "判断是否评分低于4分，如果是就建议补充排班，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-050",
+      "text": "判断是否评分低于4分，如果是就生成风险说明，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-051",
+      "text": "判断是否转化率低于3%，如果是就触发预警，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-052",
+      "text": "判断是否转化率低于3%，如果是就给出优化建议，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-053",
+      "text": "判断是否转化率低于3%，如果是就生成升级处理方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-054",
+      "text": "判断是否转化率低于3%，如果是就建议暂停上线，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-055",
+      "text": "判断是否转化率低于3%，如果是就输出复盘重点，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-056",
+      "text": "判断是否转化率低于3%，如果是就安排人工复核，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-057",
+      "text": "判断是否转化率低于3%，如果是就推荐扩容方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-058",
+      "text": "判断是否转化率低于3%，如果是就生成客服话术，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-059",
+      "text": "判断是否转化率低于3%，如果是就建议补充排班，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-060",
+      "text": "判断是否转化率低于3%，如果是就生成风险说明，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-061",
+      "text": "判断是否缺陷数超过20个，如果是就触发预警，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-062",
+      "text": "判断是否缺陷数超过20个，如果是就给出优化建议，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-063",
+      "text": "判断是否缺陷数超过20个，如果是就生成升级处理方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-064",
+      "text": "判断是否缺陷数超过20个，如果是就建议暂停上线，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-065",
+      "text": "判断是否缺陷数超过20个，如果是就输出复盘重点，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-066",
+      "text": "判断是否缺陷数超过20个，如果是就安排人工复核，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-067",
+      "text": "判断是否缺陷数超过20个，如果是就推荐扩容方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-068",
+      "text": "判断是否缺陷数超过20个，如果是就生成客服话术，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-069",
+      "text": "判断是否缺陷数超过20个，如果是就建议补充排班，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-070",
+      "text": "判断是否缺陷数超过20个，如果是就生成风险说明，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-071",
+      "text": "判断是否排队人数超过30人，如果是就触发预警，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-072",
+      "text": "判断是否排队人数超过30人，如果是就给出优化建议，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-073",
+      "text": "判断是否排队人数超过30人，如果是就生成升级处理方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-074",
+      "text": "判断是否排队人数超过30人，如果是就建议暂停上线，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-075",
+      "text": "判断是否排队人数超过30人，如果是就输出复盘重点，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-076",
+      "text": "判断是否排队人数超过30人，如果是就安排人工复核，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-077",
+      "text": "判断是否排队人数超过30人，如果是就推荐扩容方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-078",
+      "text": "判断是否排队人数超过30人，如果是就生成客服话术，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-079",
+      "text": "判断是否排队人数超过30人，如果是就建议补充排班，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-080",
+      "text": "判断是否排队人数超过30人，如果是就生成风险说明，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-081",
+      "text": "判断是否缺勤率高于8%，如果是就触发预警，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-082",
+      "text": "判断是否缺勤率高于8%，如果是就给出优化建议，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-083",
+      "text": "判断是否缺勤率高于8%，如果是就生成升级处理方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-084",
+      "text": "判断是否缺勤率高于8%，如果是就建议暂停上线，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-085",
+      "text": "判断是否缺勤率高于8%，如果是就输出复盘重点，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-086",
+      "text": "判断是否缺勤率高于8%，如果是就安排人工复核，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-087",
+      "text": "判断是否缺勤率高于8%，如果是就推荐扩容方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-088",
+      "text": "判断是否缺勤率高于8%，如果是就生成客服话术，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-089",
+      "text": "判断是否缺勤率高于8%，如果是就建议补充排班，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-090",
+      "text": "判断是否缺勤率高于8%，如果是就生成风险说明，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-091",
+      "text": "判断是否CPU使用率超过85%，如果是就触发预警，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-092",
+      "text": "判断是否CPU使用率超过85%，如果是就给出优化建议，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-093",
+      "text": "判断是否CPU使用率超过85%，如果是就生成升级处理方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-094",
+      "text": "判断是否CPU使用率超过85%，如果是就建议暂停上线，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-095",
+      "text": "判断是否CPU使用率超过85%，如果是就输出复盘重点，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-096",
+      "text": "判断是否CPU使用率超过85%，如果是就安排人工复核，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-097",
+      "text": "判断是否CPU使用率超过85%，如果是就推荐扩容方案，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-098",
+      "text": "判断是否CPU使用率超过85%，如果是就生成客服话术，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-099",
+      "text": "判断是否CPU使用率超过85%，如果是就建议补充排班，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-BRA-100",
+      "text": "判断是否CPU使用率超过85%，如果是就生成风险说明，否则说明无需处理",
+      "query_level": "BRANCH",
+      "query_level_id": 3,
+      "query_level_desc": "L3-分支逻辑查询：如条件分支、并行分支等",
+      "internal_dependency_type": "condition",
+      "contains_internal_dependency": true,
+      "topic": "条件分支"
+    },
+    {
+      "seed_task_id": "SEED-COM-001",
+      "text": "先收集智能门锁的用户差评，再按功能、价格、售后分类，最后给出改进优先级",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "多步分类优先级"
+    },
+    {
+      "seed_task_id": "SEED-COM-002",
+      "text": "围绕智能门锁生成竞品清单，逐个比较核心参数，再汇总购买建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "竞品迭代比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-003",
+      "text": "先收集扫地机器人的用户差评，再按功能、价格、售后分类，最后给出改进优先级",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "多步分类优先级"
+    },
+    {
+      "seed_task_id": "SEED-COM-004",
+      "text": "围绕扫地机器人生成竞品清单，逐个比较核心参数，再汇总购买建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "竞品迭代比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-005",
+      "text": "先收集蓝牙耳机的用户差评，再按功能、价格、售后分类，最后给出改进优先级",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "多步分类优先级"
+    },
+    {
+      "seed_task_id": "SEED-COM-006",
+      "text": "围绕蓝牙耳机生成竞品清单，逐个比较核心参数，再汇总购买建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "竞品迭代比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-007",
+      "text": "先收集新能源汽车的用户差评，再按功能、价格、售后分类，最后给出改进优先级",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "多步分类优先级"
+    },
+    {
+      "seed_task_id": "SEED-COM-008",
+      "text": "围绕新能源汽车生成竞品清单，逐个比较核心参数，再汇总购买建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "竞品迭代比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-009",
+      "text": "先收集儿童安全座椅的用户差评，再按功能、价格、售后分类，最后给出改进优先级",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "多步分类优先级"
+    },
+    {
+      "seed_task_id": "SEED-COM-010",
+      "text": "围绕儿童安全座椅生成竞品清单，逐个比较核心参数，再汇总购买建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "竞品迭代比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-011",
+      "text": "先收集空气炸锅的用户差评，再按功能、价格、售后分类，最后给出改进优先级",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "多步分类优先级"
+    },
+    {
+      "seed_task_id": "SEED-COM-012",
+      "text": "围绕空气炸锅生成竞品清单，逐个比较核心参数，再汇总购买建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "竞品迭代比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-013",
+      "text": "先收集投影仪的用户差评，再按功能、价格、售后分类，最后给出改进优先级",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "多步分类优先级"
+    },
+    {
+      "seed_task_id": "SEED-COM-014",
+      "text": "围绕投影仪生成竞品清单，逐个比较核心参数，再汇总购买建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "竞品迭代比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-015",
+      "text": "先收集智能手表的用户差评，再按功能、价格、售后分类，最后给出改进优先级",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "多步分类优先级"
+    },
+    {
+      "seed_task_id": "SEED-COM-016",
+      "text": "围绕智能手表生成竞品清单，逐个比较核心参数，再汇总购买建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "竞品迭代比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-017",
+      "text": "先收集咖啡机的用户差评，再按功能、价格、售后分类，最后给出改进优先级",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "多步分类优先级"
+    },
+    {
+      "seed_task_id": "SEED-COM-018",
+      "text": "围绕咖啡机生成竞品清单，逐个比较核心参数，再汇总购买建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "竞品迭代比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-019",
+      "text": "先收集路由器的用户差评，再按功能、价格、售后分类，最后给出改进优先级",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "多步分类优先级"
+    },
+    {
+      "seed_task_id": "SEED-COM-020",
+      "text": "围绕路由器生成竞品清单，逐个比较核心参数，再汇总购买建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "竞品迭代比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-021",
+      "text": "阅读《员工手册》中关于合规的章节，抽取风险点，逐条匹配整改措施并输出清单",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "文档风险清单"
+    },
+    {
+      "seed_task_id": "SEED-COM-022",
+      "text": "从《员工手册》提取流程节点，检查每个节点是否有负责人，缺失时给出补充建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "流程检查"
+    },
+    {
+      "seed_task_id": "SEED-COM-023",
+      "text": "阅读《产品FAQ》中关于合规的章节，抽取风险点，逐条匹配整改措施并输出清单",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "文档风险清单"
+    },
+    {
+      "seed_task_id": "SEED-COM-024",
+      "text": "从《产品FAQ》提取流程节点，检查每个节点是否有负责人，缺失时给出补充建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "流程检查"
+    },
+    {
+      "seed_task_id": "SEED-COM-025",
+      "text": "阅读《数据治理规范》中关于合规的章节，抽取风险点，逐条匹配整改措施并输出清单",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "文档风险清单"
+    },
+    {
+      "seed_task_id": "SEED-COM-026",
+      "text": "从《数据治理规范》提取流程节点，检查每个节点是否有负责人，缺失时给出补充建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "流程检查"
+    },
+    {
+      "seed_task_id": "SEED-COM-027",
+      "text": "阅读《项目复盘报告》中关于合规的章节，抽取风险点，逐条匹配整改措施并输出清单",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "文档风险清单"
+    },
+    {
+      "seed_task_id": "SEED-COM-028",
+      "text": "从《项目复盘报告》提取流程节点，检查每个节点是否有负责人，缺失时给出补充建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "流程检查"
+    },
+    {
+      "seed_task_id": "SEED-COM-029",
+      "text": "阅读《客服知识库》中关于合规的章节，抽取风险点，逐条匹配整改措施并输出清单",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "文档风险清单"
+    },
+    {
+      "seed_task_id": "SEED-COM-030",
+      "text": "从《客服知识库》提取流程节点，检查每个节点是否有负责人，缺失时给出补充建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "流程检查"
+    },
+    {
+      "seed_task_id": "SEED-COM-031",
+      "text": "阅读《合同模板说明》中关于合规的章节，抽取风险点，逐条匹配整改措施并输出清单",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "文档风险清单"
+    },
+    {
+      "seed_task_id": "SEED-COM-032",
+      "text": "从《合同模板说明》提取流程节点，检查每个节点是否有负责人，缺失时给出补充建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "流程检查"
+    },
+    {
+      "seed_task_id": "SEED-COM-033",
+      "text": "阅读《安全应急预案》中关于合规的章节，抽取风险点，逐条匹配整改措施并输出清单",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "文档风险清单"
+    },
+    {
+      "seed_task_id": "SEED-COM-034",
+      "text": "从《安全应急预案》提取流程节点，检查每个节点是否有负责人，缺失时给出补充建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "流程检查"
+    },
+    {
+      "seed_task_id": "SEED-COM-035",
+      "text": "阅读《市场调研纪要》中关于合规的章节，抽取风险点，逐条匹配整改措施并输出清单",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "文档风险清单"
+    },
+    {
+      "seed_task_id": "SEED-COM-036",
+      "text": "从《市场调研纪要》提取流程节点，检查每个节点是否有负责人，缺失时给出补充建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "流程检查"
+    },
+    {
+      "seed_task_id": "SEED-COM-037",
+      "text": "阅读《API接入文档》中关于合规的章节，抽取风险点，逐条匹配整改措施并输出清单",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "文档风险清单"
+    },
+    {
+      "seed_task_id": "SEED-COM-038",
+      "text": "从《API接入文档》提取流程节点，检查每个节点是否有负责人，缺失时给出补充建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "流程检查"
+    },
+    {
+      "seed_task_id": "SEED-COM-039",
+      "text": "阅读《招投标规则》中关于合规的章节，抽取风险点，逐条匹配整改措施并输出清单",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "文档风险清单"
+    },
+    {
+      "seed_task_id": "SEED-COM-040",
+      "text": "从《招投标规则》提取流程节点，检查每个节点是否有负责人，缺失时给出补充建议",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "流程检查"
+    },
+    {
+      "seed_task_id": "SEED-COM-041",
+      "text": "分析销售一部过去三个月的关键指标，找出异常波动，追溯可能原因并形成复盘结论",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "指标复盘"
+    },
+    {
+      "seed_task_id": "SEED-COM-042",
+      "text": "逐周检查销售一部的工单数据，发现异常周后继续下钻到问题类型并总结原因",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "逐周下钻"
+    },
+    {
+      "seed_task_id": "SEED-COM-043",
+      "text": "分析华东区过去三个月的关键指标，找出异常波动，追溯可能原因并形成复盘结论",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "指标复盘"
+    },
+    {
+      "seed_task_id": "SEED-COM-044",
+      "text": "逐周检查华东区的工单数据，发现异常周后继续下钻到问题类型并总结原因",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "逐周下钻"
+    },
+    {
+      "seed_task_id": "SEED-COM-045",
+      "text": "分析北区过去三个月的关键指标，找出异常波动，追溯可能原因并形成复盘结论",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "指标复盘"
+    },
+    {
+      "seed_task_id": "SEED-COM-046",
+      "text": "逐周检查北区的工单数据，发现异常周后继续下钻到问题类型并总结原因",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "逐周下钻"
+    },
+    {
+      "seed_task_id": "SEED-COM-047",
+      "text": "分析电商渠道过去三个月的关键指标，找出异常波动，追溯可能原因并形成复盘结论",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "指标复盘"
+    },
+    {
+      "seed_task_id": "SEED-COM-048",
+      "text": "逐周检查电商渠道的工单数据，发现异常周后继续下钻到问题类型并总结原因",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "逐周下钻"
+    },
+    {
+      "seed_task_id": "SEED-COM-049",
+      "text": "分析海外业务部过去三个月的关键指标，找出异常波动，追溯可能原因并形成复盘结论",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "指标复盘"
+    },
+    {
+      "seed_task_id": "SEED-COM-050",
+      "text": "逐周检查海外业务部的工单数据，发现异常周后继续下钻到问题类型并总结原因",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "逐周下钻"
+    },
+    {
+      "seed_task_id": "SEED-COM-051",
+      "text": "分析客服中心过去三个月的关键指标，找出异常波动，追溯可能原因并形成复盘结论",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "指标复盘"
+    },
+    {
+      "seed_task_id": "SEED-COM-052",
+      "text": "逐周检查客服中心的工单数据，发现异常周后继续下钻到问题类型并总结原因",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "逐周下钻"
+    },
+    {
+      "seed_task_id": "SEED-COM-053",
+      "text": "分析研发平台组过去三个月的关键指标，找出异常波动，追溯可能原因并形成复盘结论",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "指标复盘"
+    },
+    {
+      "seed_task_id": "SEED-COM-054",
+      "text": "逐周检查研发平台组的工单数据，发现异常周后继续下钻到问题类型并总结原因",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "逐周下钻"
+    },
+    {
+      "seed_task_id": "SEED-COM-055",
+      "text": "分析运营增长组过去三个月的关键指标，找出异常波动，追溯可能原因并形成复盘结论",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "指标复盘"
+    },
+    {
+      "seed_task_id": "SEED-COM-056",
+      "text": "逐周检查运营增长组的工单数据，发现异常周后继续下钻到问题类型并总结原因",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "逐周下钻"
+    },
+    {
+      "seed_task_id": "SEED-COM-057",
+      "text": "分析供应链团队过去三个月的关键指标，找出异常波动，追溯可能原因并形成复盘结论",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "指标复盘"
+    },
+    {
+      "seed_task_id": "SEED-COM-058",
+      "text": "逐周检查供应链团队的工单数据，发现异常周后继续下钻到问题类型并总结原因",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "逐周下钻"
+    },
+    {
+      "seed_task_id": "SEED-COM-059",
+      "text": "分析财务共享中心过去三个月的关键指标，找出异常波动，追溯可能原因并形成复盘结论",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "指标复盘"
+    },
+    {
+      "seed_task_id": "SEED-COM-060",
+      "text": "逐周检查财务共享中心的工单数据，发现异常周后继续下钻到问题类型并总结原因",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "逐周下钻"
+    },
+    {
+      "seed_task_id": "SEED-COM-061",
+      "text": "检索Transformer的代表论文，按时间线梳理方法演进，再总结三个研究趋势",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "研究演进"
+    },
+    {
+      "seed_task_id": "SEED-COM-062",
+      "text": "找出Transformer相关论文中的常用数据集，逐个比较任务设置并归纳评测差异",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "论文数据集比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-063",
+      "text": "检索BERT的代表论文，按时间线梳理方法演进，再总结三个研究趋势",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "研究演进"
+    },
+    {
+      "seed_task_id": "SEED-COM-064",
+      "text": "找出BERT相关论文中的常用数据集，逐个比较任务设置并归纳评测差异",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "论文数据集比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-065",
+      "text": "检索RAG的代表论文，按时间线梳理方法演进，再总结三个研究趋势",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "研究演进"
+    },
+    {
+      "seed_task_id": "SEED-COM-066",
+      "text": "找出RAG相关论文中的常用数据集，逐个比较任务设置并归纳评测差异",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "论文数据集比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-067",
+      "text": "检索LoRA的代表论文，按时间线梳理方法演进，再总结三个研究趋势",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "研究演进"
+    },
+    {
+      "seed_task_id": "SEED-COM-068",
+      "text": "找出LoRA相关论文中的常用数据集，逐个比较任务设置并归纳评测差异",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "论文数据集比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-069",
+      "text": "检索CRISPR的代表论文，按时间线梳理方法演进，再总结三个研究趋势",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "研究演进"
+    },
+    {
+      "seed_task_id": "SEED-COM-070",
+      "text": "找出CRISPR相关论文中的常用数据集，逐个比较任务设置并归纳评测差异",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "论文数据集比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-071",
+      "text": "检索AlphaFold的代表论文，按时间线梳理方法演进，再总结三个研究趋势",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "研究演进"
+    },
+    {
+      "seed_task_id": "SEED-COM-072",
+      "text": "找出AlphaFold相关论文中的常用数据集，逐个比较任务设置并归纳评测差异",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "论文数据集比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-073",
+      "text": "检索Diffusion Model的代表论文，按时间线梳理方法演进，再总结三个研究趋势",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "研究演进"
+    },
+    {
+      "seed_task_id": "SEED-COM-074",
+      "text": "找出Diffusion Model相关论文中的常用数据集，逐个比较任务设置并归纳评测差异",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "论文数据集比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-075",
+      "text": "检索PageRank的代表论文，按时间线梳理方法演进，再总结三个研究趋势",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "研究演进"
+    },
+    {
+      "seed_task_id": "SEED-COM-076",
+      "text": "找出PageRank相关论文中的常用数据集，逐个比较任务设置并归纳评测差异",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "论文数据集比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-077",
+      "text": "检索MapReduce的代表论文，按时间线梳理方法演进，再总结三个研究趋势",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "研究演进"
+    },
+    {
+      "seed_task_id": "SEED-COM-078",
+      "text": "找出MapReduce相关论文中的常用数据集，逐个比较任务设置并归纳评测差异",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "论文数据集比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-079",
+      "text": "检索ResNet的代表论文，按时间线梳理方法演进，再总结三个研究趋势",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "研究演进"
+    },
+    {
+      "seed_task_id": "SEED-COM-080",
+      "text": "找出ResNet相关论文中的常用数据集，逐个比较任务设置并归纳评测差异",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "iteration",
+      "contains_internal_dependency": true,
+      "topic": "论文数据集比较"
+    },
+    {
+      "seed_task_id": "SEED-COM-081",
+      "text": "规划北京三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "旅行路线规划"
+    },
+    {
+      "seed_task_id": "SEED-COM-082",
+      "text": "查询北京未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "逐日天气安排"
+    },
+    {
+      "seed_task_id": "SEED-COM-083",
+      "text": "规划上海三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "旅行路线规划"
+    },
+    {
+      "seed_task_id": "SEED-COM-084",
+      "text": "查询上海未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "逐日天气安排"
+    },
+    {
+      "seed_task_id": "SEED-COM-085",
+      "text": "规划广州三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "旅行路线规划"
+    },
+    {
+      "seed_task_id": "SEED-COM-086",
+      "text": "查询广州未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "逐日天气安排"
+    },
+    {
+      "seed_task_id": "SEED-COM-087",
+      "text": "规划深圳三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "旅行路线规划"
+    },
+    {
+      "seed_task_id": "SEED-COM-088",
+      "text": "查询深圳未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "逐日天气安排"
+    },
+    {
+      "seed_task_id": "SEED-COM-089",
+      "text": "规划杭州三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "旅行路线规划"
+    },
+    {
+      "seed_task_id": "SEED-COM-090",
+      "text": "查询杭州未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "逐日天气安排"
+    },
+    {
+      "seed_task_id": "SEED-COM-091",
+      "text": "规划成都三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "旅行路线规划"
+    },
+    {
+      "seed_task_id": "SEED-COM-092",
+      "text": "查询成都未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "逐日天气安排"
+    },
+    {
+      "seed_task_id": "SEED-COM-093",
+      "text": "规划武汉三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "旅行路线规划"
+    },
+    {
+      "seed_task_id": "SEED-COM-094",
+      "text": "查询武汉未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "逐日天气安排"
+    },
+    {
+      "seed_task_id": "SEED-COM-095",
+      "text": "规划南京三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "旅行路线规划"
+    },
+    {
+      "seed_task_id": "SEED-COM-096",
+      "text": "查询南京未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "逐日天气安排"
+    },
+    {
+      "seed_task_id": "SEED-COM-097",
+      "text": "规划西安三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "旅行路线规划"
+    },
+    {
+      "seed_task_id": "SEED-COM-098",
+      "text": "查询西安未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "逐日天气安排"
+    },
+    {
+      "seed_task_id": "SEED-COM-099",
+      "text": "规划重庆三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "multi_step",
+      "contains_internal_dependency": true,
+      "topic": "旅行路线规划"
+    },
+    {
+      "seed_task_id": "SEED-COM-100",
+      "text": "查询重庆未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+      "query_level": "COMPLEX",
+      "query_level_id": 4,
+      "query_level_desc": "L4-多步调用查询：如循环迭代、复杂逻辑组合等",
+      "internal_dependency_type": "loop_condition",
+      "contains_internal_dependency": true,
+      "topic": "逐日天气安排"
+    },
+    {
+      "seed_task_id": "SEED-AUT-001",
+      "text": "围绕“把一个新产品从0到1推向市场”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-002",
+      "text": "为“把一个新产品从0到1推向市场”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-003",
+      "text": "持续监控“把一个新产品从0到1推向市场”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-004",
+      "text": "围绕“为团队建立季度OKR管理机制”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-005",
+      "text": "为“为团队建立季度OKR管理机制”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-006",
+      "text": "持续监控“为团队建立季度OKR管理机制”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-007",
+      "text": "围绕“完成一场线上发布会筹备”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-008",
+      "text": "为“完成一场线上发布会筹备”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-009",
+      "text": "持续监控“完成一场线上发布会筹备”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-010",
+      "text": "围绕“建立客户流失预警体系”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-011",
+      "text": "为“建立客户流失预警体系”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-012",
+      "text": "持续监控“建立客户流失预警体系”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-013",
+      "text": "围绕“优化公司知识库问答效果”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-014",
+      "text": "为“优化公司知识库问答效果”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-015",
+      "text": "持续监控“优化公司知识库问答效果”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-016",
+      "text": "围绕“推进旧系统迁移到新平台”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-017",
+      "text": "为“推进旧系统迁移到新平台”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-018",
+      "text": "持续监控“推进旧系统迁移到新平台”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-019",
+      "text": "围绕“提升客服满意度”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-020",
+      "text": "为“提升客服满意度”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-021",
+      "text": "持续监控“提升客服满意度”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-022",
+      "text": "围绕“搭建销售线索评分模型”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-023",
+      "text": "为“搭建销售线索评分模型”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-024",
+      "text": "持续监控“搭建销售线索评分模型”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-025",
+      "text": "围绕“制定校园招聘计划”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-026",
+      "text": "为“制定校园招聘计划”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-027",
+      "text": "持续监控“制定校园招聘计划”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-028",
+      "text": "围绕“建设数据质量治理流程”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-029",
+      "text": "为“建设数据质量治理流程”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-030",
+      "text": "持续监控“建设数据质量治理流程”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-031",
+      "text": "围绕“组织一次跨部门安全演练”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-032",
+      "text": "为“组织一次跨部门安全演练”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-033",
+      "text": "持续监控“组织一次跨部门安全演练”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-034",
+      "text": "围绕“制定海外市场进入计划”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-035",
+      "text": "为“制定海外市场进入计划”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-036",
+      "text": "持续监控“制定海外市场进入计划”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-037",
+      "text": "围绕“设计会员增长实验体系”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-038",
+      "text": "为“设计会员增长实验体系”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-039",
+      "text": "持续监控“设计会员增长实验体系”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-040",
+      "text": "围绕“建立供应商绩效评估机制”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-041",
+      "text": "为“建立供应商绩效评估机制”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-042",
+      "text": "持续监控“建立供应商绩效评估机制”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-043",
+      "text": "围绕“筹备年度预算评审”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-044",
+      "text": "为“筹备年度预算评审”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-045",
+      "text": "持续监控“筹备年度预算评审”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-046",
+      "text": "围绕“搭建模型评测流水线”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-047",
+      "text": "为“搭建模型评测流水线”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-048",
+      "text": "持续监控“搭建模型评测流水线”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-049",
+      "text": "围绕“改进仓库库存预警机制”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-050",
+      "text": "为“改进仓库库存预警机制”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-051",
+      "text": "持续监控“改进仓库库存预警机制”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-052",
+      "text": "围绕“推进合同审核自动化”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-053",
+      "text": "为“推进合同审核自动化”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-054",
+      "text": "持续监控“推进合同审核自动化”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-055",
+      "text": "围绕“设计新员工培训营”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-056",
+      "text": "为“设计新员工培训营”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-057",
+      "text": "持续监控“设计新员工培训营”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-058",
+      "text": "围绕“提升移动端首页转化率”制定完整执行计划，包括目标拆解、资源安排、风险控制和里程碑",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "自主规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-059",
+      "text": "为“提升移动端首页转化率”设计一个可迭代推进方案，每周检查结果并根据反馈调整下一步任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "迭代规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-060",
+      "text": "持续监控“提升移动端首页转化率”的关键进展，发现阻塞时自动提出备选方案并更新行动清单",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "monitoring_loop",
+      "contains_internal_dependency": true,
+      "topic": "持续监控"
+    },
+    {
+      "seed_task_id": "SEED-AUT-061",
+      "text": "作为销售一部的项目助理，自主规划下月重点工作，拆解任务、安排负责人并跟踪风险",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "团队助理规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-062",
+      "text": "为销售一部建立自动周报机制，定期收集数据、判断异常、追问原因并生成改进任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "自动周报机制"
+    },
+    {
+      "seed_task_id": "SEED-AUT-063",
+      "text": "作为华东区的项目助理，自主规划下月重点工作，拆解任务、安排负责人并跟踪风险",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "团队助理规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-064",
+      "text": "为华东区建立自动周报机制，定期收集数据、判断异常、追问原因并生成改进任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "自动周报机制"
+    },
+    {
+      "seed_task_id": "SEED-AUT-065",
+      "text": "作为北区的项目助理，自主规划下月重点工作，拆解任务、安排负责人并跟踪风险",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "团队助理规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-066",
+      "text": "为北区建立自动周报机制，定期收集数据、判断异常、追问原因并生成改进任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "自动周报机制"
+    },
+    {
+      "seed_task_id": "SEED-AUT-067",
+      "text": "作为电商渠道的项目助理，自主规划下月重点工作，拆解任务、安排负责人并跟踪风险",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "团队助理规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-068",
+      "text": "为电商渠道建立自动周报机制，定期收集数据、判断异常、追问原因并生成改进任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "自动周报机制"
+    },
+    {
+      "seed_task_id": "SEED-AUT-069",
+      "text": "作为海外业务部的项目助理，自主规划下月重点工作，拆解任务、安排负责人并跟踪风险",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "团队助理规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-070",
+      "text": "为海外业务部建立自动周报机制，定期收集数据、判断异常、追问原因并生成改进任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "自动周报机制"
+    },
+    {
+      "seed_task_id": "SEED-AUT-071",
+      "text": "作为客服中心的项目助理，自主规划下月重点工作，拆解任务、安排负责人并跟踪风险",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "团队助理规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-072",
+      "text": "为客服中心建立自动周报机制，定期收集数据、判断异常、追问原因并生成改进任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "自动周报机制"
+    },
+    {
+      "seed_task_id": "SEED-AUT-073",
+      "text": "作为研发平台组的项目助理，自主规划下月重点工作，拆解任务、安排负责人并跟踪风险",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "团队助理规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-074",
+      "text": "为研发平台组建立自动周报机制，定期收集数据、判断异常、追问原因并生成改进任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "自动周报机制"
+    },
+    {
+      "seed_task_id": "SEED-AUT-075",
+      "text": "作为运营增长组的项目助理，自主规划下月重点工作，拆解任务、安排负责人并跟踪风险",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "团队助理规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-076",
+      "text": "为运营增长组建立自动周报机制，定期收集数据、判断异常、追问原因并生成改进任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "自动周报机制"
+    },
+    {
+      "seed_task_id": "SEED-AUT-077",
+      "text": "作为供应链团队的项目助理，自主规划下月重点工作，拆解任务、安排负责人并跟踪风险",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "团队助理规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-078",
+      "text": "为供应链团队建立自动周报机制，定期收集数据、判断异常、追问原因并生成改进任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "自动周报机制"
+    },
+    {
+      "seed_task_id": "SEED-AUT-079",
+      "text": "作为财务共享中心的项目助理，自主规划下月重点工作，拆解任务、安排负责人并跟踪风险",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "团队助理规划"
+    },
+    {
+      "seed_task_id": "SEED-AUT-080",
+      "text": "为财务共享中心建立自动周报机制，定期收集数据、判断异常、追问原因并生成改进任务",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "recursive_iteration",
+      "contains_internal_dependency": true,
+      "topic": "自动周报机制"
+    },
+    {
+      "seed_task_id": "SEED-AUT-081",
+      "text": "为智能门锁上市制定端到端运营方案，从调研、定价、渠道到复盘都要自主拆解",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "产品上市方案"
+    },
+    {
+      "seed_task_id": "SEED-AUT-082",
+      "text": "为扫地机器人上市制定端到端运营方案，从调研、定价、渠道到复盘都要自主拆解",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "产品上市方案"
+    },
+    {
+      "seed_task_id": "SEED-AUT-083",
+      "text": "为蓝牙耳机上市制定端到端运营方案，从调研、定价、渠道到复盘都要自主拆解",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "产品上市方案"
+    },
+    {
+      "seed_task_id": "SEED-AUT-084",
+      "text": "为新能源汽车上市制定端到端运营方案，从调研、定价、渠道到复盘都要自主拆解",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "产品上市方案"
+    },
+    {
+      "seed_task_id": "SEED-AUT-085",
+      "text": "为儿童安全座椅上市制定端到端运营方案，从调研、定价、渠道到复盘都要自主拆解",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "产品上市方案"
+    },
+    {
+      "seed_task_id": "SEED-AUT-086",
+      "text": "为空气炸锅上市制定端到端运营方案，从调研、定价、渠道到复盘都要自主拆解",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "产品上市方案"
+    },
+    {
+      "seed_task_id": "SEED-AUT-087",
+      "text": "为投影仪上市制定端到端运营方案，从调研、定价、渠道到复盘都要自主拆解",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "产品上市方案"
+    },
+    {
+      "seed_task_id": "SEED-AUT-088",
+      "text": "为智能手表上市制定端到端运营方案，从调研、定价、渠道到复盘都要自主拆解",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "产品上市方案"
+    },
+    {
+      "seed_task_id": "SEED-AUT-089",
+      "text": "为咖啡机上市制定端到端运营方案，从调研、定价、渠道到复盘都要自主拆解",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "产品上市方案"
+    },
+    {
+      "seed_task_id": "SEED-AUT-090",
+      "text": "为路由器上市制定端到端运营方案，从调研、定价、渠道到复盘都要自主拆解",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "产品上市方案"
+    },
+    {
+      "seed_task_id": "SEED-AUT-091",
+      "text": "自主规划北京城市活动运营项目，完成调研、排期、执行监控和复盘优化",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "城市活动运营"
+    },
+    {
+      "seed_task_id": "SEED-AUT-092",
+      "text": "自主规划上海城市活动运营项目，完成调研、排期、执行监控和复盘优化",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "城市活动运营"
+    },
+    {
+      "seed_task_id": "SEED-AUT-093",
+      "text": "自主规划广州城市活动运营项目，完成调研、排期、执行监控和复盘优化",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "城市活动运营"
+    },
+    {
+      "seed_task_id": "SEED-AUT-094",
+      "text": "自主规划深圳城市活动运营项目，完成调研、排期、执行监控和复盘优化",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "城市活动运营"
+    },
+    {
+      "seed_task_id": "SEED-AUT-095",
+      "text": "自主规划杭州城市活动运营项目，完成调研、排期、执行监控和复盘优化",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "城市活动运营"
+    },
+    {
+      "seed_task_id": "SEED-AUT-096",
+      "text": "自主规划成都城市活动运营项目，完成调研、排期、执行监控和复盘优化",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "城市活动运营"
+    },
+    {
+      "seed_task_id": "SEED-AUT-097",
+      "text": "自主规划武汉城市活动运营项目，完成调研、排期、执行监控和复盘优化",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "城市活动运营"
+    },
+    {
+      "seed_task_id": "SEED-AUT-098",
+      "text": "自主规划南京城市活动运营项目，完成调研、排期、执行监控和复盘优化",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "城市活动运营"
+    },
+    {
+      "seed_task_id": "SEED-AUT-099",
+      "text": "自主规划西安城市活动运营项目，完成调研、排期、执行监控和复盘优化",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "城市活动运营"
+    },
+    {
+      "seed_task_id": "SEED-AUT-100",
+      "text": "自主规划重庆城市活动运营项目，完成调研、排期、执行监控和复盘优化",
+      "query_level": "AUTONOMY",
+      "query_level_id": 5,
+      "query_level_desc": "L5-全自主查询：如任务规划、递归循环、持续监控等",
+      "internal_dependency_type": "planning",
+      "contains_internal_dependency": true,
+      "topic": "城市活动运营"
+    }
+  ]
+}

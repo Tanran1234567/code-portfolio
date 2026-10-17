@@ -1,0 +1,24 @@
+paths:
+  embeddings: ${CREATININE_WARD_OUTPUT}/evaluation/embeddings/jepa
+  predictor: ${CREATININE_WARD_OUTPUT}/clin_jepa/checkpoints/final/predictor.pt
+  pretrain_config: configs/train/pretrain_creatinine_ward_v1.yaml
+  output: ${CREATININE_WARD_OUTPUT}/evaluation/creatinine_probe
+
+label:
+  name: label_creatinine_class
+  class_names: [HIGH, NOT_HIGH, NOT_MEASURED]
+  threshold_mg_dl: 1.5
+
+probe:
+  c_values: [0.0001, 0.001, 0.01, 0.1, 1.0, 10.0]
+  max_iter: 3000
+  patient_equal_weight: true
+
+rollout:
+  horizons_steps: [1, 2]
+  action_mode: real
+  min_context_nodes: 1
+
+metrics:
+  bootstrap_replicates: 500
+  bootstrap_seed: 42

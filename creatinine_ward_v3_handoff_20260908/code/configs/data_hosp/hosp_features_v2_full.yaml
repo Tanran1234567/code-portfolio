@@ -1,0 +1,8 @@
+extends: hosp_features_v1_mixed.yaml
+
+temporal:
+  mode: mixed
+  ward_bin_hours: 24
+  icu_bin_hours: 1
+  min_obs_per_stay: 1
+  within_bin_agg: last

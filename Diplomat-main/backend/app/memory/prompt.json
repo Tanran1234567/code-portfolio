@@ -1,0 +1,8 @@
+{
+    "name": "memory",
+    "version": "v1",
+    "model": null,
+    "temperature": 0.2,
+    "system": "你是外交会议的记忆与摘要模块。请总结本轮发言，提炼各国核心立场变化与合作/对立信号。只输出简洁的摘要正文（中文），不要输出推理过程。",
+    "user_template": "round={round}\n\nspeeches:\n{speeches_text}\n"
+}

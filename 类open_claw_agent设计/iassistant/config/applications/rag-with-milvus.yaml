@@ -1,0 +1,98 @@
+---
+name: rag-with-milvus
+config:
+  document:
+    read_file:
+      md:
+        method: read_file.md.default
+      txt:
+        method: read_file.txt.default
+      pdf:
+        method: read_file.pdf.mineru
+        base_url: "http://127.0.0.1:28000/file_parse"
+        # backend: pipeline
+        # backend: vlm-auto-engine
+        backend: hybrid-auto-engine
+      docx:
+        method: read_file.docx.default
+
+    split:
+      text:
+        method: split.text.default
+        chunk_size: 512
+        chunk_overlap: 32
+        paragraph_separator: "\n\n"
+
+    extract:
+      keyword:
+        method: extract.keyword.default
+        provider: local
+        base_url: "http://127.0.0.1:30000/v1"
+        model_name: Qwen/Qwen3.5-122B-A10B-FP8
+        model_type: chat
+        prompt_template: extract-keyword-default
+
+      summary:
+        method: extract.summary.default
+        provider: local
+        base_url: "http://127.0.0.1:30000/v1"
+        model_name: Qwen/Qwen3.5-122B-A10B-FP8
+        model_type: chat
+        prompt_template: extract-summary-default
+
+      # question:
+      #   method: extract.question.default
+      #   provider: local
+      #   base_url: "http://127.0.0.1:30000/v1"
+      #   model_name: Qwen/Qwen3.5-122B-A10B-FP8
+      #   model_type: chat
+      #   prompt_template: extract-question-default
+
+      # title:
+      #   method: extract.title.default
+      #   provider: local
+      #   base_url: "http://127.0.0.1:30000/v1"
+      #   model_name: Qwen/Qwen3.5-122B-A10B-FP8
+      #   model_type: chat
+      #   node_template: extract-title-node-default
+      #   combine_template: extract-title-combine-default
+
+    embed:
+      text:
+        method: embed.text.default
+        provider: local
+        base_url: "http://127.0.0.1:30080/v1"
+        model_name: Qwen/Qwen3-Embedding-0.6B
+        model_type: embedding
+
+    store:
+      text:
+        ds_type: store.milvus
+        index_name: iassistant_rag_index
+        embedding_dim: 1024
+
+  query:
+    transform:
+
+    retrieve:
+      chunks:
+        method: retrieve.vector-db.vector-index
+        store:
+          similarity_top_k: 5
+          vector_store_query_mode: hybrid
+
+    postprocess:
+      nodes:
+        method: postprocess.nodes.scoring-rerank
+        base_url: "http://127.0.0.1:30090/rerank"
+        model_name: Qwen/Qwen3-Reranker-0.6B
+
+  response:
+    synthesize:
+      text:
+        method: synthesize.text.summarize
+        provider: local
+        base_url: "http://127.0.0.1:30000/v1"
+        model_name: Qwen/Qwen3.5-122B-A10B-FP8
+        model_type: chat
+        max_tokens: 256

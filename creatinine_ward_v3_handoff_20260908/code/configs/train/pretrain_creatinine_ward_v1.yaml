@@ -1,0 +1,67 @@
+model:
+  base_model: ${QWEN_PATH}
+  # Always start JEPA from the validation-selected SFT checkpoint. The final
+  # epoch may already be overfit on this small cohort.
+  checkpoint_dir: ${CREATININE_WARD_OUTPUT}/encoder_sft/best
+  attn_implementation: flash_attention_2
+  gradient_checkpointing: true
+  torch_dtype: bfloat16
+
+predictor:
+  state_dim: 4096
+  action_dim: 4096
+  static_dim: 4096
+  hidden_dim: 1024
+  num_layers: 6
+  num_heads: 8
+  ffn_dim: 4096
+  max_timesteps: 30
+  ffn_dropout: 0.15
+  attn_dropout: 0.10
+  prediction_mode: absolute
+  use_continuous_time: false
+  absolute_time_additive: true
+
+data:
+  train_dir: ${CREATININE_WARD_DATA_ROOT}/trajectories
+  val_dir: ${CREATININE_WARD_DATA_ROOT}/trajectories
+  index_dir: ${CREATININE_WARD_OUTPUT}/clin_jepa/trajectory_indices
+  max_seq_len: 4096
+  min_length: 4
+
+training:
+  lr_encoder: 5.0e-5
+  lr_predictor: 5.0e-4
+  weight_decay: 0.04
+  per_gpu_batch_size: 1
+  grad_accum: 16
+  warmup_ratio: 0.02
+  seed: 42
+  gradient_clip_encoder: 0.5
+  gradient_clip_predictor: 1.0
+  rollout_horizon: 2
+  phases:
+    phase_1_steps: 104
+    phase_2a_steps: 104
+    phase_2b_steps: 35
+    phase_4_steps: 157
+  ema:
+    tau_phase_2a: 0.996
+    tau_phase_2b: 0.996
+    target_precision: float32
+
+logging:
+  log_every: 10
+  eval_every: 50
+  eval_max_windows: 100
+  val_windows: 450
+  resume_every: 25
+
+save:
+  dir: ${CREATININE_WARD_OUTPUT}/clin_jepa
+  save_best: true
+  save_final: true
+
+hf:
+  cache_dir: ${HF_HOME}
+  offline: true

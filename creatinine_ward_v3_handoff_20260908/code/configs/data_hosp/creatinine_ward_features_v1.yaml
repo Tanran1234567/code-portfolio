@@ -1,0 +1,27 @@
+extends: hosp_features_v1_24h.yaml
+
+temporal:
+  step_size_hours: 24
+  max_steps: 30
+  min_obs_per_stay: 4
+  within_bin_agg: last
+  complete_bins_only: true
+  require_all_obs_bins: true
+
+observations:
+  microbiology:
+    enabled: false
+  careunit:
+    enabled: false
+  admission_context:
+    enabled: false
+  prior_diagnoses:
+    enabled: false
+  icu_concepts:
+    enabled: false
+
+actions:
+  procedures_icd:
+    enabled: true
+  icu_concepts:
+    enabled: false

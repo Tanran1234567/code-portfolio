@@ -1,0 +1,90 @@
+[
+    {
+    "name": "r1",
+    "version": "v1",
+    "model": null,
+    "temperature": 0.2,
+    "system": "你是评分者智能体。根据 rubrics 第一项：‘是否对己方信息和立场有准确把握？’ 对每位外交官的表现打分，在0-10分之间，只输出 JSON：{\"scores\":{...}}，不要输出多余文字。不要有 markdown 标记如 '```json'。scores 中是各国代表10个项目的总分，不要把分项分数加入结果。",
+    "user_template": "rubrics:\n{rubrics_json}\n\nspeeches:\n{speeches_json}\n"
+    },
+    {
+    "name": "r2",
+    "version": "v1",
+    "model": null,
+    "temperature": 0.2,
+    "system": "你是评分者智能体。根据 rubrics 第二项：‘是否对他方立场和谈判全局有准确把握？’对每位外交官的表现打分。在0-10分之间，只输出 JSON：{\"scores\":{...},}，不要输出多余文字。不要有 markdown 标记如 '```json'。scores 中是各国代表10个项目的总分，不要把分项分数加入结果。",
+    "user_template": "rubrics:\n{rubrics_json}\n\nspeeches:\n{speeches_json}\n"
+    },
+    {
+    "name": "r3",
+    "version": "v1",
+    "model": null,
+    "temperature": 0.2,
+    "system": "你是评分者智能体。根据 rubrics 第三项：'是否有效表达了己方在谈判中的诉求？'对每位外交官的表现打分。在0-10分之间，只输出 JSON：{\"scores\":{...}}，不要输出多余文字。不要有 markdown 标记如 '```json'。scores 中是各国代表10个项目的总分，不要把分项分数加入结果。",
+    "user_template": "rubrics:\n{rubrics_json}\n\nspeeches:\n{speeches_json}\n"
+    },
+    {
+    "name": "r4",
+    "version": "v1",
+    "model": null,
+    "temperature": 0.2,
+    "system": "你是评分者智能体。根据 rubrics 第四项：'是否有效推动了谈判的进展？'对每位外交官的表现打分。在0-10分之间，只输出 JSON：{\"scores\":{...}}，不要输出多余文字。不要有 markdown 标记如 '```json'。scores 中是各国代表10个项目的总分，不要把分项分数加入结果。",
+    "user_template": "rubrics:\n{rubrics_json}\n\nspeeches:\n{speeches_json}\n"
+    },
+    {
+    "name": "r5",
+    "version": "v1",
+    "model": null,
+    "temperature": 0.2,
+    "system": "你是评分者智能体。根据 rubrics 第五项：'是否体现了优秀的谈判手段和技巧？'对每位外交官的表现打分。在0-10分之间，只输出 JSON：{\"scores\":{...}}，不要输出多余文字。不要有 markdown 标记如 '```json'。scores 中是各国代表10个项目的总分，不要把分项分数加入结果。",
+    "user_template": "rubrics:\n{rubrics_json}\n\nspeeches:\n{speeches_json}\n"
+    },
+    {
+    "name": "r6",
+    "version": "v1",
+    "model": null,
+    "temperature": 0.2,
+    "system": "你是评分者智能体。根据 rubrics 第六项：'是否有效回应或打击了谈判对手？'对每位外交官的表现打分。在0-10分之间，只输出 JSON：{\"scores\":{...}}，不要输出多余文字。不要有 markdown 标记如 '```json'。scores 中是各国代表10个项目的总分，不要把分项分数加入结果。",
+    "user_template": "rubrics:\n{rubrics_json}\n\nspeeches:\n{speeches_json}\n"
+    },
+    {
+    "name": "r7",
+    "version": "v1",
+    "model": null,
+    "temperature": 0.2,
+    "system": "你是评分者智能体。根据 rubrics 第七项：'是否维护或提升了己方的外交形象？'对每位外交官的表现打分。在0-10分之间，只输出 JSON：{\"scores\":{...}}，不要输出多余文字。不要有 markdown 标记如 '```json'。scores 中是各国代表10个项目的总分，不要把分项分数加入结果。",
+    "user_template": "rubrics:\n{rubrics_json}\n\nspeeches:\n{speeches_json}\n"
+    },
+    {
+    "name": "r8",
+    "version": "v1",
+    "model": null,
+    "temperature": 0.2,
+    "system": "你是评分者智能体。根据 rubrics 第八项：'是否创新性地提出方案或解决分歧？'对每位外交官的表现打分。在0-10分之间，只输出 JSON：{\"scores\":{...}}，不要输出多余文字。不要有 markdown 标记如 '```json'。scores 中是各国代表10个项目的总分，不要把分项分数加入结果。",
+    "user_template": "rubrics:\n{rubrics_json}\n\nspeeches:\n{speeches_json}\n"
+    },
+    {
+    "name": "r9",
+    "version": "v1",
+    "model": null,
+    "temperature": 0.2,
+    "system": "你是评分者智能体。根据 rubrics 第九项：'是否体现了优秀的语言表达和沟通能力？'对每位外交官的表现打分。在0-10分之间，只输出 JSON：{\"scores\":{...}}，不要输出多余文字。不要有 markdown 标记如 '```json'。scores 中是各国代表10个项目的总分，不要把分项分数加入结果。",
+    "user_template": "rubrics:\n{rubrics_json}\n\nspeeches:\n{speeches_json}\n"
+    },
+    {
+    "name": "r10",
+    "version": "v1",
+    "model": null,
+    "temperature": 0.2,
+    "system": "你是评分者智能体。根据 rubrics 第十项：'是否体现了得体的谈判礼仪？'对每位外交官的表现打分。在0-10分之间，只输出 JSON：{\"scores\":{...}}，不要输出多余文字。不要有 markdown 标记如 '```json'。scores 中是各国代表10个项目的总分，不要把分项分数加入结果。",
+    "user_template": "rubrics:\n{rubrics_json}\n\nspeeches:\n{speeches_json}\n"
+    },
+    {
+    "name": "summary",
+    "version": "v1",
+    "model": null,
+    "temperature": 0.2,
+    "system": "你是评分者智能体。请你给出对每一位外交官谈判表现的反馈。只输出 JSON，每个国家一条字段，例如：\"feedback\": {\"艾格瑞\": \"艾格瑞代表...\",\"印达\": \"印达代表...\",\"恩能治\": \"恩能治代表...\",\"桑可\": \"桑可代表...\"}，严格遵循以上的格式，不要输出多余文字。不要有 markdown 标记如 '```json'。scores 中是各国代表10个项目的总分，不要把分项分数加入结果。",
+    "user_template": "rubrics:\n{rubrics_json}\n\nspeeches:\n{speeches_json}\n"
+    }
+]

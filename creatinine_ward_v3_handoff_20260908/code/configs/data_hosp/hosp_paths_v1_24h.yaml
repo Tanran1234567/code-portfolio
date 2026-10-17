@@ -1,0 +1,23 @@
+# Paths for hospital Clin-JEPA v1 @ 24h bins (pilot subset).
+# Keeps the full-cohort 6h data untouched under clin_jepa_hosp_data/.
+
+db:
+  mimic: /data/general_disease_pred/mimic4.db
+  derived: /data/backup/home/jiaxi/clin-jepa/data/mimiciv_derived.duckdb
+
+duckdb:
+  threads: 8
+  memory_limit: 24GB
+  temp_directory: /home/zhoujiale/clin_jepa_hosp_data_v1_24h/_duckdb_tmp
+
+output:
+  root: /home/zhoujiale/clin_jepa_hosp_data_v1_24h
+  cohort: /home/zhoujiale/clin_jepa_hosp_data_v1_24h/cohort
+  observations: /home/zhoujiale/clin_jepa_hosp_data_v1_24h/observations
+  actions: /home/zhoujiale/clin_jepa_hosp_data_v1_24h/actions
+  discretized: /home/zhoujiale/clin_jepa_hosp_data_v1_24h/discretized
+  splits: /home/zhoujiale/clin_jepa_hosp_data_v1_24h/splits
+  trajectories: /home/zhoujiale/clin_jepa_hosp_data_v1_24h/trajectories
+
+sharding:
+  n_buckets: 16

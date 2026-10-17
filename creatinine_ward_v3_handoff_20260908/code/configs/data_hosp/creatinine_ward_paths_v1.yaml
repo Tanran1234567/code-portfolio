@@ -1,0 +1,22 @@
+extends: hosp_paths.yaml
+
+db:
+  mimic: ${MIMIC_DUCKDB}
+  derived: null
+
+duckdb:
+  threads: 16
+  memory_limit: 64GB
+  temp_directory: ${CREATININE_WARD_DATA_ROOT}/_duckdb_tmp
+
+output:
+  root: ${CREATININE_WARD_DATA_ROOT}
+  cohort: ${CREATININE_WARD_DATA_ROOT}/cohort
+  splits: ${CREATININE_WARD_DATA_ROOT}/splits
+  observations: ${CREATININE_WARD_DATA_ROOT}/observations
+  actions: ${CREATININE_WARD_DATA_ROOT}/actions
+  discretized: ${CREATININE_WARD_DATA_ROOT}/discretized
+  trajectories: ${CREATININE_WARD_DATA_ROOT}/trajectories
+
+sharding:
+  n_buckets: 16

@@ -1,0 +1,29 @@
+# Secrets and local environments
+.env
+.env.*
+!.env.example
+!env.example
+*.conf
+*.pem
+*.key
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.idea/
+.ipynb_checkpoints/
+# Patient-level data: only the public explanation is tracked
+creatinine_ward_v3_handoff_20260908/data/*
+!creatinine_ward_v3_handoff_20260908/data/README.md
+# Generated artifacts and model weights
+*.pt
+*.pth
+*.parquet
+*.onnx
+*.avi
+*.mp4
+*.zip
+*.tar.gz
+runs/

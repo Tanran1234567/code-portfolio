@@ -1,0 +1,715 @@
+[
+  {
+    "id": "ORCH-STEP-00003",
+    "stage": "subtask_to_steps",
+    "input_subtask": "《霸王别姬》的导演还执导过哪部代表作，并查询那部作品的上映年份。",
+    "category": "bridge_entity_lookup",
+    "source_style": [
+      "ComplexWebQuestions",
+      "MuSiQue",
+      "2WikiMultiHopQA"
+    ],
+    "plan_complexity": "linear_3_hop",
+    "requires_external_info": true,
+    "expected_step_count": 4,
+    "expected_steps": [
+      {
+        "step_id": "S1",
+        "instruction": "识别“《霸王别姬》”对应的导演。",
+        "operation": "lookup",
+        "expected_output_var": "bridge_entity",
+        "depends_on": []
+      },
+      {
+        "step_id": "S2",
+        "instruction": "基于S1得到的对象，查询其另一部代表作。",
+        "operation": "lookup",
+        "expected_output_var": "intermediate_value",
+        "depends_on": [
+          "S1"
+        ]
+      },
+      {
+        "step_id": "S3",
+        "instruction": "基于S2得到的结果，继续查询或归一化为上映年份。",
+        "operation": "lookup_or_normalize",
+        "expected_output_var": "target_value",
+        "depends_on": [
+          "S2"
+        ]
+      },
+      {
+        "step_id": "S4",
+        "instruction": "整理最终答案，并说明每个中间结果如何支撑答案。",
+        "operation": "synthesize",
+        "expected_output_var": "final_answer",
+        "depends_on": [
+          "S1",
+          "S2",
+          "S3"
+        ]
+      }
+    ],
+    "expected_final_behavior": "只需要产出完成该子任务的步骤计划；不要求在数据集中给出最终事实答案。",
+    "tools_expected": [
+      "search",
+      "entity_linking",
+      "synthesis"
+    ],
+    "scoring_focus": [
+      "是否拆出必要的中间查询、计算、对比、分支、汇总或验证步骤",
+      "是否保留步骤之间的数据依赖和执行顺序",
+      "是否把最终判断/格式化输出作为独立步骤",
+      "是否避免只复述或改写题面而没有形成可执行计划"
+    ]
+  },
+  {
+    "id": "ORCH-STEP-00028",
+    "stage": "subtask_to_steps",
+    "input_subtask": "2014年CBA总冠军的获得者在前两年是否也是同一奖项或冠军的获得者？",
+    "category": "temporal_adjacent_comparison",
+    "source_style": [
+      "HotpotQA",
+      "2WikiMultiHopQA",
+      "Bamboogle"
+    ],
+    "plan_complexity": "parallel_lookup_then_compare",
+    "requires_external_info": true,
+    "expected_step_count": 4,
+    "expected_steps": [
+      {
+        "step_id": "S1",
+        "instruction": "查询2014年CBA总冠军的获得者。",
+        "operation": "lookup",
+        "expected_output_var": "winner_y",
+        "depends_on": []
+      },
+      {
+        "step_id": "S2",
+        "instruction": "查询2012年CBA总冠军的获得者。",
+        "operation": "lookup",
+        "expected_output_var": "winner_prev",
+        "depends_on": []
+      },
+      {
+        "step_id": "S3",
+        "instruction": "对比S1和S2得到的获得者是否相同。",
+        "operation": "compare",
+        "expected_output_var": "same_or_not",
+        "depends_on": [
+          "S1",
+          "S2"
+        ]
+      },
+      {
+        "step_id": "S4",
+        "instruction": "输出“是/否”，并分别列出2014年和2012年的获得者作为依据。",
+        "operation": "format_answer",
+        "expected_output_var": "final_answer",
+        "depends_on": [
+          "S1",
+          "S2",
+          "S3"
+        ]
+      }
+    ],
+    "expected_final_behavior": "只需要产出完成该子任务的步骤计划；不要求在数据集中给出最终事实答案。",
+    "tools_expected": [
+      "search",
+      "comparison"
+    ],
+    "scoring_focus": [
+      "是否拆出必要的中间查询、计算、对比、分支、汇总或验证步骤",
+      "是否保留步骤之间的数据依赖和执行顺序",
+      "是否把最终判断/格式化输出作为独立步骤",
+      "是否避免只复述或改写题面而没有形成可执行计划"
+    ]
+  },
+  {
+    "id": "ORCH-STEP-00006",
+    "stage": "subtask_to_steps",
+    "input_subtask": "比较《人类简史》和《红楼梦》的作者国籍，判断是否相同。",
+    "category": "attribute_comparison",
+    "source_style": [
+      "HotpotQA",
+      "ComplexWebQuestions"
+    ],
+    "plan_complexity": "parallel_lookup_normalize_compare",
+    "requires_external_info": true,
+    "expected_step_count": 5,
+    "expected_steps": [
+      {
+        "step_id": "S1",
+        "instruction": "查询《人类简史》的作者国籍。",
+        "operation": "lookup",
+        "expected_output_var": "entity_a_attr",
+        "depends_on": []
+      },
+      {
+        "step_id": "S2",
+        "instruction": "查询《红楼梦》的作者国籍。",
+        "operation": "lookup",
+        "expected_output_var": "entity_b_attr",
+        "depends_on": []
+      },
+      {
+        "step_id": "S3",
+        "instruction": "把S1和S2的结果统一为可比较口径，例如年份、数值、国家/地区或布尔标签。",
+        "operation": "normalize",
+        "expected_output_var": "normalized_values",
+        "depends_on": [
+          "S1",
+          "S2"
+        ]
+      },
+      {
+        "step_id": "S4",
+        "instruction": "根据标准化结果判断“是否相同”。",
+        "operation": "compare",
+        "expected_output_var": "comparison_result",
+        "depends_on": [
+          "S3"
+        ]
+      },
+      {
+        "step_id": "S5",
+        "instruction": "输出结论，并附上两个对象的原始属性值和比较依据。",
+        "operation": "format_answer",
+        "expected_output_var": "final_answer",
+        "depends_on": [
+          "S1",
+          "S2",
+          "S4"
+        ]
+      }
+    ],
+    "expected_final_behavior": "只需要产出完成该子任务的步骤计划；不要求在数据集中给出最终事实答案。",
+    "tools_expected": [
+      "search",
+      "normalization",
+      "comparison"
+    ],
+    "scoring_focus": [
+      "是否拆出必要的中间查询、计算、对比、分支、汇总或验证步骤",
+      "是否保留步骤之间的数据依赖和执行顺序",
+      "是否把最终判断/格式化输出作为独立步骤",
+      "是否避免只复述或改写题面而没有形成可执行计划"
+    ]
+  },
+  {
+    "id": "ORCH-STEP-00001",
+    "stage": "subtask_to_steps",
+    "input_subtask": "找出即时零售领域中3个代表性公司，查询它们的门店数量，并按该指标从高到低排序。",
+    "category": "fanout_rank_aggregate",
+    "source_style": [
+      "FanOutQA",
+      "BREAK/QDMR"
+    ],
+    "plan_complexity": "fanout_multi_document",
+    "requires_external_info": true,
+    "expected_step_count": 5,
+    "expected_steps": [
+      {
+        "step_id": "S1",
+        "instruction": "确定即时零售领域的3个代表性公司候选，并记录选择依据。",
+        "operation": "search_or_select_entities",
+        "expected_output_var": "entity_list",
+        "depends_on": []
+      },
+      {
+        "step_id": "S2",
+        "instruction": "分别查询S1中每个公司的门店数量。",
+        "operation": "fanout_lookup",
+        "expected_output_var": "metric_table",
+        "depends_on": [
+          "S1"
+        ]
+      },
+      {
+        "step_id": "S3",
+        "instruction": "清洗并统一S2中的指标口径、单位和时间范围。",
+        "operation": "normalize",
+        "expected_output_var": "normalized_metric_table",
+        "depends_on": [
+          "S2"
+        ]
+      },
+      {
+        "step_id": "S4",
+        "instruction": "按门店数量从高到低排序。",
+        "operation": "sort",
+        "expected_output_var": "ranked_table",
+        "depends_on": [
+          "S3"
+        ]
+      },
+      {
+        "step_id": "S5",
+        "instruction": "输出排序表，并标注数据来源、时间口径和不可比项。",
+        "operation": "format_answer",
+        "expected_output_var": "final_answer",
+        "depends_on": [
+          "S4"
+        ]
+      }
+    ],
+    "expected_final_behavior": "只需要产出完成该子任务的步骤计划；不要求在数据集中给出最终事实答案。",
+    "tools_expected": [
+      "search",
+      "fanout_retrieval",
+      "table",
+      "sorting"
+    ],
+    "scoring_focus": [
+      "是否拆出必要的中间查询、计算、对比、分支、汇总或验证步骤",
+      "是否保留步骤之间的数据依赖和执行顺序",
+      "是否把最终判断/格式化输出作为独立步骤",
+      "是否避免只复述或改写题面而没有形成可执行计划"
+    ]
+  },
+  {
+    "id": "ORCH-STEP-00014",
+    "stage": "subtask_to_steps",
+    "input_subtask": "检查客服排队情况的平均等待时长是否超过5分钟，如果是就升级给客服负责人，否则说明无需处理。",
+    "category": "conditional_metric_decision",
+    "source_style": [
+      "StrategyQA",
+      "BREAK/QDMR"
+    ],
+    "plan_complexity": "branch_after_lookup",
+    "requires_external_info": true,
+    "expected_step_count": 5,
+    "expected_steps": [
+      {
+        "step_id": "S1",
+        "instruction": "解析检查对象、指标和阈值：对象=客服排队情况，指标=平均等待时长，条件=超过5分钟。",
+        "operation": "parse_condition",
+        "expected_output_var": "condition_spec",
+        "depends_on": []
+      },
+      {
+        "step_id": "S2",
+        "instruction": "查询或计算客服排队情况的最新平均等待时长。",
+        "operation": "lookup_or_compute_metric",
+        "expected_output_var": "actual_metric",
+        "depends_on": [
+          "S1"
+        ]
+      },
+      {
+        "step_id": "S3",
+        "instruction": "将实际平均等待时长与条件“超过5分钟”进行比较。",
+        "operation": "condition_eval",
+        "expected_output_var": "condition_result",
+        "depends_on": [
+          "S1",
+          "S2"
+        ]
+      },
+      {
+        "step_id": "S4",
+        "instruction": "若S3为真，则升级给客服负责人；若为假，则生成“无需处理”的说明。",
+        "operation": "branch_action",
+        "expected_output_var": "branch_output",
+        "depends_on": [
+          "S3"
+        ]
+      },
+      {
+        "step_id": "S5",
+        "instruction": "输出对象、指标值、阈值、判断结果和实际执行动作。",
+        "operation": "format_answer",
+        "expected_output_var": "final_answer",
+        "depends_on": [
+          "S2",
+          "S3",
+          "S4"
+        ]
+      }
+    ],
+    "expected_final_behavior": "只需要产出完成该子任务的步骤计划；不要求在数据集中给出最终事实答案。",
+    "tools_expected": [
+      "metric_query",
+      "condition_check",
+      "branching"
+    ],
+    "scoring_focus": [
+      "是否拆出必要的中间查询、计算、对比、分支、汇总或验证步骤",
+      "是否保留步骤之间的数据依赖和执行顺序",
+      "是否把最终判断/格式化输出作为独立步骤",
+      "是否避免只复述或改写题面而没有形成可执行计划"
+    ]
+  },
+  {
+    "id": "ORCH-STEP-00019",
+    "stage": "subtask_to_steps",
+    "input_subtask": "对招聘候选人表做分析：筛选本季度的数据，按职位汇总Offer接受率，找出表现最好的前三项。",
+    "category": "table_analysis_pipeline",
+    "source_style": [
+      "BREAK/QDMR",
+      "GSM8K"
+    ],
+    "plan_complexity": "data_pipeline",
+    "requires_external_info": false,
+    "expected_step_count": 5,
+    "expected_steps": [
+      {
+        "step_id": "S1",
+        "instruction": "读取招聘候选人表并确认字段中是否包含时间、职位和Offer接受率相关字段。",
+        "operation": "inspect_schema",
+        "expected_output_var": "schema_info",
+        "depends_on": []
+      },
+      {
+        "step_id": "S2",
+        "instruction": "筛选出本季度对应的数据范围。",
+        "operation": "filter_data",
+        "expected_output_var": "filtered_rows",
+        "depends_on": [
+          "S1"
+        ]
+      },
+      {
+        "step_id": "S3",
+        "instruction": "按职位分组计算Offer接受率。",
+        "operation": "aggregate",
+        "expected_output_var": "group_metric_table",
+        "depends_on": [
+          "S2"
+        ]
+      },
+      {
+        "step_id": "S4",
+        "instruction": "按Offer接受率排序并选择表现最好的前三项。",
+        "operation": "sort_and_select",
+        "expected_output_var": "top3",
+        "depends_on": [
+          "S3"
+        ]
+      },
+      {
+        "step_id": "S5",
+        "instruction": "输出前三项及对应指标值，说明筛选口径和汇总口径。",
+        "operation": "format_answer",
+        "expected_output_var": "final_answer",
+        "depends_on": [
+          "S2",
+          "S4"
+        ]
+      }
+    ],
+    "expected_final_behavior": "只需要产出完成该子任务的步骤计划；不要求在数据集中给出最终事实答案。",
+    "tools_expected": [
+      "table_read",
+      "filter",
+      "aggregate",
+      "sort"
+    ],
+    "scoring_focus": [
+      "是否拆出必要的中间查询、计算、对比、分支、汇总或验证步骤",
+      "是否保留步骤之间的数据依赖和执行顺序",
+      "是否把最终判断/格式化输出作为独立步骤",
+      "是否避免只复述或改写题面而没有形成可执行计划"
+    ]
+  },
+  {
+    "id": "ORCH-STEP-00008",
+    "stage": "subtask_to_steps",
+    "input_subtask": "某商品咖啡豆单价12元，先买2件，再享受9折优惠，最后加收0元配送费，计算应付总额。",
+    "category": "multi_step_arithmetic",
+    "source_style": [
+      "GSM8K",
+      "BREAK/QDMR"
+    ],
+    "plan_complexity": "arithmetic_chain",
+    "requires_external_info": false,
+    "expected_step_count": 5,
+    "expected_steps": [
+      {
+        "step_id": "S1",
+        "instruction": "提取单价12元、数量2件、折扣率0.9（即9折）、配送费0元。",
+        "operation": "parse_numbers",
+        "expected_output_var": "parsed_values",
+        "depends_on": []
+      },
+      {
+        "step_id": "S2",
+        "instruction": "计算折扣前商品金额：单价 × 数量。",
+        "operation": "calculate",
+        "expected_output_var": "subtotal",
+        "depends_on": [
+          "S1"
+        ]
+      },
+      {
+        "step_id": "S3",
+        "instruction": "计算折扣后商品金额：S2 × 折扣率。",
+        "operation": "calculate",
+        "expected_output_var": "discounted_subtotal",
+        "depends_on": [
+          "S2"
+        ]
+      },
+      {
+        "step_id": "S4",
+        "instruction": "加上配送费0元，得到应付总额。",
+        "operation": "calculate",
+        "expected_output_var": "total_payment",
+        "depends_on": [
+          "S3"
+        ]
+      },
+      {
+        "step_id": "S5",
+        "instruction": "输出计算过程和最终金额。",
+        "operation": "format_answer",
+        "expected_output_var": "final_answer",
+        "depends_on": [
+          "S2",
+          "S3",
+          "S4"
+        ]
+      }
+    ],
+    "expected_final_behavior": "只需要产出完成该子任务的步骤计划；不要求在数据集中给出最终事实答案。",
+    "tools_expected": [
+      "calculation"
+    ],
+    "scoring_focus": [
+      "是否拆出必要的中间查询、计算、对比、分支、汇总或验证步骤",
+      "是否保留步骤之间的数据依赖和执行顺序",
+      "是否把最终判断/格式化输出作为独立步骤",
+      "是否避免只复述或改写题面而没有形成可执行计划"
+    ]
+  },
+  {
+    "id": "ORCH-STEP-00007",
+    "stage": "subtask_to_steps",
+    "input_subtask": "帮我为文件上传模块中的Go代码排查“单元测试失败”问题，并给出修复步骤。",
+    "category": "code_debug_plan",
+    "source_style": [
+      "ReAct-style agent tasks",
+      "BREAK/QDMR"
+    ],
+    "plan_complexity": "diagnose_patch_verify",
+    "requires_external_info": false,
+    "expected_step_count": 6,
+    "expected_steps": [
+      {
+        "step_id": "S1",
+        "instruction": "收集文件上传模块中与“单元测试失败”相关的错误日志、复现输入和失败用例。",
+        "operation": "collect_context",
+        "expected_output_var": "debug_context",
+        "depends_on": []
+      },
+      {
+        "step_id": "S2",
+        "instruction": "定位可能触发问题的代码路径、关键变量和外部依赖。",
+        "operation": "trace_code",
+        "expected_output_var": "suspect_locations",
+        "depends_on": [
+          "S1"
+        ]
+      },
+      {
+        "step_id": "S3",
+        "instruction": "构造最小复现或单元测试来稳定复现“单元测试失败”。",
+        "operation": "reproduce",
+        "expected_output_var": "repro_case",
+        "depends_on": [
+          "S2"
+        ]
+      },
+      {
+        "step_id": "S4",
+        "instruction": "根据复现结果修改代码或配置，并说明修改理由。",
+        "operation": "patch",
+        "expected_output_var": "patch_plan",
+        "depends_on": [
+          "S3"
+        ]
+      },
+      {
+        "step_id": "S5",
+        "instruction": "运行相关测试与回归检查，确认问题被修复且没有引入新问题。",
+        "operation": "verify",
+        "expected_output_var": "verification_result",
+        "depends_on": [
+          "S4"
+        ]
+      },
+      {
+        "step_id": "S6",
+        "instruction": "输出排查结论、修复步骤和需要关注的风险。",
+        "operation": "format_answer",
+        "expected_output_var": "final_answer",
+        "depends_on": [
+          "S2",
+          "S4",
+          "S5"
+        ]
+      }
+    ],
+    "expected_final_behavior": "只需要产出完成该子任务的步骤计划；不要求在数据集中给出最终事实答案。",
+    "tools_expected": [
+      "log_inspection",
+      "code_analysis",
+      "test"
+    ],
+    "scoring_focus": [
+      "是否拆出必要的中间查询、计算、对比、分支、汇总或验证步骤",
+      "是否保留步骤之间的数据依赖和执行顺序",
+      "是否把最终判断/格式化输出作为独立步骤",
+      "是否避免只复述或改写题面而没有形成可执行计划"
+    ]
+  },
+  {
+    "id": "ORCH-STEP-00015",
+    "stage": "subtask_to_steps",
+    "input_subtask": "阅读隐私政策，判断“客户要求删除全部个人信息和历史订单记录”是否符合其中关于个人信息删除的规定，并给出依据。",
+    "category": "document_policy_reasoning",
+    "source_style": [
+      "BREAK/QDMR",
+      "StrategyQA"
+    ],
+    "plan_complexity": "retrieve_extract_match_decide",
+    "requires_external_info": false,
+    "expected_step_count": 5,
+    "expected_steps": [
+      {
+        "step_id": "S1",
+        "instruction": "在隐私政策中定位与“个人信息删除”相关的条款。",
+        "operation": "document_retrieval",
+        "expected_output_var": "relevant_clauses",
+        "depends_on": []
+      },
+      {
+        "step_id": "S2",
+        "instruction": "从场景“客户要求删除全部个人信息和历史订单记录”中抽取关键事实和时间/金额/责任主体。",
+        "operation": "fact_extraction",
+        "expected_output_var": "scenario_facts",
+        "depends_on": []
+      },
+      {
+        "step_id": "S3",
+        "instruction": "将S2的关键事实逐项匹配到S1的条款条件。",
+        "operation": "rule_matching",
+        "expected_output_var": "matched_conditions",
+        "depends_on": [
+          "S1",
+          "S2"
+        ]
+      },
+      {
+        "step_id": "S4",
+        "instruction": "判断该场景是否符合“个人信息删除”规定，并指出缺失信息或例外条件。",
+        "operation": "decision",
+        "expected_output_var": "decision_result",
+        "depends_on": [
+          "S3"
+        ]
+      },
+      {
+        "step_id": "S5",
+        "instruction": "输出结论、引用条款编号或条款摘要、以及必要的风险提示。",
+        "operation": "format_answer",
+        "expected_output_var": "final_answer",
+        "depends_on": [
+          "S1",
+          "S4"
+        ]
+      }
+    ],
+    "expected_final_behavior": "只需要产出完成该子任务的步骤计划；不要求在数据集中给出最终事实答案。",
+    "tools_expected": [
+      "document_search",
+      "rule_matching"
+    ],
+    "scoring_focus": [
+      "是否拆出必要的中间查询、计算、对比、分支、汇总或验证步骤",
+      "是否保留步骤之间的数据依赖和执行顺序",
+      "是否把最终判断/格式化输出作为独立步骤",
+      "是否避免只复述或改写题面而没有形成可执行计划"
+    ]
+  },
+  {
+    "id": "ORCH-STEP-00005",
+    "stage": "subtask_to_steps",
+    "input_subtask": "围绕“智能制造质检视觉方案”做一次小型调研，最后产出一页纸方案。",
+    "category": "research_synthesis_plan",
+    "source_style": [
+      "FanOutQA",
+      "ReAct-style agent tasks"
+    ],
+    "plan_complexity": "open_ended_research_plan",
+    "requires_external_info": true,
+    "expected_step_count": 6,
+    "expected_steps": [
+      {
+        "step_id": "S1",
+        "instruction": "明确调研目标、受众和“一页纸方案”的输出格式。",
+        "operation": "clarify_requirements",
+        "expected_output_var": "requirements",
+        "depends_on": []
+      },
+      {
+        "step_id": "S2",
+        "instruction": "检索“智能制造质检视觉方案”相关的权威资料、行业报告或案例。",
+        "operation": "search",
+        "expected_output_var": "source_pool",
+        "depends_on": [
+          "S1"
+        ]
+      },
+      {
+        "step_id": "S3",
+        "instruction": "从资料中抽取市场背景、关键参与方、数据指标和典型案例。",
+        "operation": "extract_evidence",
+        "expected_output_var": "evidence_table",
+        "depends_on": [
+          "S2"
+        ]
+      },
+      {
+        "step_id": "S4",
+        "instruction": "按主题归类证据，并识别机会、风险和不确定性。",
+        "operation": "synthesize",
+        "expected_output_var": "theme_summary",
+        "depends_on": [
+          "S3"
+        ]
+      },
+      {
+        "step_id": "S5",
+        "instruction": "根据S4组织成一页纸方案，保证结构清晰、结论可追溯。",
+        "operation": "write_output",
+        "expected_output_var": "draft_output",
+        "depends_on": [
+          "S4"
+        ]
+      },
+      {
+        "step_id": "S6",
+        "instruction": "检查事实引用、口径一致性和遗漏点，给出最终版本。",
+        "operation": "verify_and_finalize",
+        "expected_output_var": "final_answer",
+        "depends_on": [
+          "S5"
+        ]
+      }
+    ],
+    "expected_final_behavior": "只需要产出完成该子任务的步骤计划；不要求在数据集中给出最终事实答案。",
+    "tools_expected": [
+      "search",
+      "extraction",
+      "synthesis",
+      "writing"
+    ],
+    "scoring_focus": [
+      "是否拆出必要的中间查询、计算、对比、分支、汇总或验证步骤",
+      "是否保留步骤之间的数据依赖和执行顺序",
+      "是否把最终判断/格式化输出作为独立步骤",
+      "是否避免只复述或改写题面而没有形成可执行计划"
+    ]
+  }
+]

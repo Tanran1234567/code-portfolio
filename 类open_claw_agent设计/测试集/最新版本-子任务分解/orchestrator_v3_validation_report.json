@@ -1,0 +1,776 @@
+{
+  "files": {
+    "seed_bank": "/mnt/data/orchestrator_seed_bank_500_v3.json",
+    "jsonl": "/mnt/data/orchestrator_regenerated_5000_v3.jsonl"
+  },
+  "seed_count": 500,
+  "seed_count_by_level": {
+    "DIRECT": 100,
+    "SIMPLE": 100,
+    "BRANCH": 100,
+    "COMPLEX": 100,
+    "AUTONOMY": 100
+  },
+  "record_count": 5000,
+  "record_count_by_case_type": {
+    "independent_multi": 2500,
+    "dependent_single": 1000,
+    "mixed_boundary": 1000,
+    "single_atomic": 500
+  },
+  "record_count_by_expected_subquery_count": {
+    "4": 429,
+    "2": 1982,
+    "3": 1089,
+    "1": 1500
+  },
+  "record_count_by_max_level": {
+    "COMPLEX": 1283,
+    "BRANCH": 956,
+    "AUTONOMY": 1938,
+    "SIMPLE": 563,
+    "DIRECT": 260
+  },
+  "theme_pool_counts": {
+    "系统运维与数据治理": {
+      "DIRECT": 16,
+      "BRANCH": 40,
+      "COMPLEX": 4,
+      "AUTONOMY": 27
+    },
+    "产品体验与增长": {
+      "DIRECT": 12,
+      "BRANCH": 30,
+      "COMPLEX": 20,
+      "AUTONOMY": 25
+    },
+    "城市出行与活动": {
+      "DIRECT": 12,
+      "SIMPLE": 100,
+      "BRANCH": 10,
+      "COMPLEX": 20,
+      "AUTONOMY": 10
+    },
+    "团队协作与运营复盘": {
+      "DIRECT": 16,
+      "BRANCH": 20,
+      "COMPLEX": 20,
+      "AUTONOMY": 38
+    },
+    "文档合规与流程检查": {
+      "DIRECT": 4,
+      "COMPLEX": 20,
+      "AUTONOMY": 3
+    },
+    "通用办公处理": {
+      "DIRECT": 4
+    },
+    "数字处理与指标判断": {
+      "DIRECT": 40
+    },
+    "研究资料整理": {
+      "COMPLEX": 20
+    }
+  },
+  "autonomy_explicit_step_cue_violations": [],
+  "complex_without_explicit_step_cue": [],
+  "samples": [
+    {
+      "id": "ORCH-V3-00001",
+      "case_type": "independent_multi",
+      "input_query": "围绕出行、天气和城市活动，请分别处理下面几项：帮我查询北京今天的天气，结果用简洁中文回答；顺便麻烦规划北京三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线，结果用简洁中文回答；也请能不能帮我判断是否排队人数超过30人，如果是就触发预警，否则说明无需处理；最后纠正这句话的错别字：“会议延期到周五下午三点”，输出要点即可。",
+      "should_decompose": true,
+      "expected_subquery_count": 4,
+      "dependency_type": "none_between_subqueries",
+      "expected_subqueries": [
+        "帮我查询北京今天的天气，结果用简洁中文回答",
+        "麻烦规划北京三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线，结果用简洁中文回答",
+        "能不能帮我判断是否排队人数超过30人，如果是就触发预警，否则说明无需处理",
+        "纠正这句话的错别字：“会议延期到周五下午三点”，输出要点即可"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "帮我查询北京今天的天气，结果用简洁中文回答",
+          "query_level": "SIMPLE",
+          "query_level_id": 2,
+          "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+          "seed_task_id": "SEED-SIM-001",
+          "base_seed_text": "查询北京今天的天气",
+          "variant_id": 2,
+          "internal_dependency_type": "none",
+          "contains_internal_dependency": false
+        },
+        {
+          "subquery_index": 2,
+          "text": "麻烦规划北京三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线，结果用简洁中文回答",
+          "query_level": "COMPLEX",
+          "query_level_id": 4,
+          "query_level_desc": "L4-显式多步调用查询：query中已经给出较明确的步骤、顺序、循环或组合线索，如“先…再…最后…/逐个/逐日/按…分类”等",
+          "seed_task_id": "SEED-COM-081",
+          "base_seed_text": "规划北京三日游行程，先筛选景点，再按距离和开放时间排序，最后生成每天路线",
+          "variant_id": 3,
+          "internal_dependency_type": "multi_step",
+          "contains_internal_dependency": true
+        },
+        {
+          "subquery_index": 3,
+          "text": "能不能帮我判断是否排队人数超过30人，如果是就触发预警，否则说明无需处理",
+          "query_level": "BRANCH",
+          "query_level_id": 3,
+          "query_level_desc": "L3-分支逻辑查询：如条件判断、并行分支等，query中通常出现“如果/否则”等分支线索",
+          "seed_task_id": "SEED-BRA-071",
+          "base_seed_text": "判断是否排队人数超过30人，如果是就触发预警，否则说明无需处理",
+          "variant_id": 4,
+          "internal_dependency_type": "condition",
+          "contains_internal_dependency": true
+        },
+        {
+          "subquery_index": 4,
+          "text": "纠正这句话的错别字：“会议延期到周五下午三点”，输出要点即可",
+          "query_level": "DIRECT",
+          "query_level_id": 1,
+          "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等，通常可直接回答或做轻量文本/数值处理",
+          "seed_task_id": "SEED-DIR-009",
+          "base_seed_text": "纠正这句话的错别字：“会议延期到周五下午三点”",
+          "variant_id": 0,
+          "internal_dependency_type": "none",
+          "contains_internal_dependency": false
+        }
+      ],
+      "record_max_query_level": "COMPLEX",
+      "record_max_query_level_id": 4,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "顶层包含多个主题相近但彼此独立的子查询；输入中加入“另外/同时/顺便”等自然连接词，但这些连接词不引入结果依赖。expected_subqueries 去除纯衔接词，保留语义完整的子查询。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "23c0c07ed28e",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-00002",
+      "case_type": "independent_multi",
+      "input_query": "围绕出行、天气和城市活动，请分别处理下面几项：麻烦查询北京今天的天气，并根据天气给出穿衣建议；顺便能不能帮我查询北京未来七天天气，逐日判断是否适合户外活动，并生成备选安排；也请判断这句话的情感倾向：“会议延期到周五下午三点”；最后请判断是否排队人数超过30人，如果是就给出优化建议，否则说明无需处理。",
+      "should_decompose": true,
+      "expected_subquery_count": 4,
+      "dependency_type": "none_between_subqueries",
+      "expected_subqueries": [
+        "麻烦查询北京今天的天气，并根据天气给出穿衣建议",
+        "能不能帮我查询北京未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+        "判断这句话的情感倾向：“会议延期到周五下午三点”",
+        "请判断是否排队人数超过30人，如果是就给出优化建议，否则说明无需处理"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "麻烦查询北京今天的天气，并根据天气给出穿衣建议",
+          "query_level": "SIMPLE",
+          "query_level_id": 2,
+          "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+          "seed_task_id": "SEED-SIM-002",
+          "base_seed_text": "查询北京今天的天气，并根据天气给出穿衣建议",
+          "variant_id": 3,
+          "internal_dependency_type": "causal_or_result_reference",
+          "contains_internal_dependency": true
+        },
+        {
+          "subquery_index": 2,
+          "text": "能不能帮我查询北京未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+          "query_level": "COMPLEX",
+          "query_level_id": 4,
+          "query_level_desc": "L4-显式多步调用查询：query中已经给出较明确的步骤、顺序、循环或组合线索，如“先…再…最后…/逐个/逐日/按…分类”等",
+          "seed_task_id": "SEED-COM-082",
+          "base_seed_text": "查询北京未来七天天气，逐日判断是否适合户外活动，并生成备选安排",
+          "variant_id": 4,
+          "internal_dependency_type": "loop_condition",
+          "contains_internal_dependency": true
+        },
+        {
+          "subquery_index": 3,
+          "text": "判断这句话的情感倾向：“会议延期到周五下午三点”",
+          "query_level": "DIRECT",
+          "query_level_id": 1,
+          "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等，通常可直接回答或做轻量文本/数值处理",
+          "seed_task_id": "SEED-DIR-010",
+          "base_seed_text": "判断这句话的情感倾向：“会议延期到周五下午三点”",
+          "variant_id": 0,
+          "internal_dependency_type": "none",
+          "contains_internal_dependency": false
+        },
+        {
+          "subquery_index": 4,
+          "text": "请判断是否排队人数超过30人，如果是就给出优化建议，否则说明无需处理",
+          "query_level": "BRANCH",
+          "query_level_id": 3,
+          "query_level_desc": "L3-分支逻辑查询：如条件判断、并行分支等，query中通常出现“如果/否则”等分支线索",
+          "seed_task_id": "SEED-BRA-072",
+          "base_seed_text": "判断是否排队人数超过30人，如果是就给出优化建议，否则说明无需处理",
+          "variant_id": 1,
+          "internal_dependency_type": "condition",
+          "contains_internal_dependency": true
+        }
+      ],
+      "record_max_query_level": "COMPLEX",
+      "record_max_query_level_id": 4,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "顶层包含多个主题相近但彼此独立的子查询；输入中加入“另外/同时/顺便”等自然连接词，但这些连接词不引入结果依赖。expected_subqueries 去除纯衔接词，保留语义完整的子查询。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "79be3fcf114c",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-00003",
+      "case_type": "independent_multi",
+      "input_query": "我想集中处理一下出行、天气和城市活动相关的两个问题：能不能帮我判断是否排队人数超过30人，如果是就生成升级处理方案，否则说明无需处理，输出要点即可，另外查询北京明天的天气，结果用简洁中文回答。",
+      "should_decompose": true,
+      "expected_subquery_count": 2,
+      "dependency_type": "none_between_subqueries",
+      "expected_subqueries": [
+        "能不能帮我判断是否排队人数超过30人，如果是就生成升级处理方案，否则说明无需处理，输出要点即可",
+        "查询北京明天的天气，结果用简洁中文回答"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "能不能帮我判断是否排队人数超过30人，如果是就生成升级处理方案，否则说明无需处理，输出要点即可",
+          "query_level": "BRANCH",
+          "query_level_id": 3,
+          "query_level_desc": "L3-分支逻辑查询：如条件判断、并行分支等，query中通常出现“如果/否则”等分支线索",
+          "seed_task_id": "SEED-BRA-073",
+          "base_seed_text": "判断是否排队人数超过30人，如果是就生成升级处理方案，否则说明无需处理",
+          "variant_id": 4,
+          "internal_dependency_type": "condition",
+          "contains_internal_dependency": true
+        },
+        {
+          "subquery_index": 2,
+          "text": "查询北京明天的天气，结果用简洁中文回答",
+          "query_level": "SIMPLE",
+          "query_level_id": 2,
+          "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+          "seed_task_id": "SEED-SIM-003",
+          "base_seed_text": "查询北京明天的天气",
+          "variant_id": 0,
+          "internal_dependency_type": "none",
+          "contains_internal_dependency": false
+        }
+      ],
+      "record_max_query_level": "BRANCH",
+      "record_max_query_level_id": 3,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "顶层包含多个主题相近但彼此独立的子查询；输入中加入“另外/同时/顺便”等自然连接词，但这些连接词不引入结果依赖。expected_subqueries 去除纯衔接词，保留语义完整的子查询。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "15f271fcb7b9",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-00004",
+      "case_type": "independent_multi",
+      "input_query": "围绕出行、天气和城市活动，我有两件事想一起问：查询北京明天的天气，并根据天气给出穿衣建议，结果用简洁中文回答；同时请判断是否排队人数超过30人，如果是就建议暂停上线，否则说明无需处理。",
+      "should_decompose": true,
+      "expected_subquery_count": 2,
+      "dependency_type": "none_between_subqueries",
+      "expected_subqueries": [
+        "查询北京明天的天气，并根据天气给出穿衣建议，结果用简洁中文回答",
+        "请判断是否排队人数超过30人，如果是就建议暂停上线，否则说明无需处理"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "查询北京明天的天气，并根据天气给出穿衣建议，结果用简洁中文回答",
+          "query_level": "SIMPLE",
+          "query_level_id": 2,
+          "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+          "seed_task_id": "SEED-SIM-004",
+          "base_seed_text": "查询北京明天的天气，并根据天气给出穿衣建议",
+          "variant_id": 0,
+          "internal_dependency_type": "causal_or_result_reference",
+          "contains_internal_dependency": true
+        },
+        {
+          "subquery_index": 2,
+          "text": "请判断是否排队人数超过30人，如果是就建议暂停上线，否则说明无需处理",
+          "query_level": "BRANCH",
+          "query_level_id": 3,
+          "query_level_desc": "L3-分支逻辑查询：如条件判断、并行分支等，query中通常出现“如果/否则”等分支线索",
+          "seed_task_id": "SEED-BRA-074",
+          "base_seed_text": "判断是否排队人数超过30人，如果是就建议暂停上线，否则说明无需处理",
+          "variant_id": 1,
+          "internal_dependency_type": "condition",
+          "contains_internal_dependency": true
+        }
+      ],
+      "record_max_query_level": "BRANCH",
+      "record_max_query_level_id": 3,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "顶层包含多个主题相近但彼此独立的子查询；输入中加入“另外/同时/顺便”等自然连接词，但这些连接词不引入结果依赖。expected_subqueries 去除纯衔接词，保留语义完整的子查询。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "d20d39fbbb3f",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-00005",
+      "case_type": "independent_multi",
+      "input_query": "这两件事都和产品体验、上市和增长有关，麻烦分别处理：请纠正这句话的错别字：“这个方案很有创意但是预算偏高”，输出要点即可；顺便帮我判断是否退款率高于5%，如果是就触发预警，否则说明无需处理，输出要点即可。",
+      "should_decompose": true,
+      "expected_subquery_count": 2,
+      "dependency_type": "none_between_subqueries",
+      "expected_subqueries": [
+        "请纠正这句话的错别字：“这个方案很有创意但是预算偏高”，输出要点即可",
+        "帮我判断是否退款率高于5%，如果是就触发预警，否则说明无需处理，输出要点即可"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "请纠正这句话的错别字：“这个方案很有创意但是预算偏高”，输出要点即可",
+          "query_level": "DIRECT",
+          "query_level_id": 1,
+          "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等，通常可直接回答或做轻量文本/数值处理",
+          "seed_task_id": "SEED-DIR-005",
+          "base_seed_text": "纠正这句话的错别字：“这个方案很有创意但是预算偏高”",
+          "variant_id": 1,
+          "internal_dependency_type": "none",
+          "contains_internal_dependency": false
+        },
+        {
+          "subquery_index": 2,
+          "text": "帮我判断是否退款率高于5%，如果是就触发预警，否则说明无需处理，输出要点即可",
+          "query_level": "BRANCH",
+          "query_level_id": 3,
+          "query_level_desc": "L3-分支逻辑查询：如条件判断、并行分支等，query中通常出现“如果/否则”等分支线索",
+          "seed_task_id": "SEED-BRA-011",
+          "base_seed_text": "判断是否退款率高于5%，如果是就触发预警，否则说明无需处理",
+          "variant_id": 2,
+          "internal_dependency_type": "condition",
+          "contains_internal_dependency": true
+        }
+      ],
+      "record_max_query_level": "BRANCH",
+      "record_max_query_level_id": 3,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "顶层包含多个主题相近但彼此独立的子查询；输入中加入“另外/同时/顺便”等自然连接词，但这些连接词不引入结果依赖。expected_subqueries 去除纯衔接词，保留语义完整的子查询。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "65df66f4e375",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-02501",
+      "case_type": "dependent_single",
+      "input_query": "请把下面这件研究资料整理相关的事整体完成：帮我检索PageRank的代表论文，按时间线梳理方法演进，再总结三个研究趋势。",
+      "should_decompose": false,
+      "expected_subquery_count": 1,
+      "dependency_type": "multi_step",
+      "expected_subqueries": [
+        "帮我检索PageRank的代表论文，按时间线梳理方法演进，再总结三个研究趋势"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "帮我检索PageRank的代表论文，按时间线梳理方法演进，再总结三个研究趋势",
+          "query_level": "COMPLEX",
+          "query_level_id": 4,
+          "query_level_desc": "L4-显式多步调用查询：query中已经给出较明确的步骤、顺序、循环或组合线索，如“先…再…最后…/逐个/逐日/按…分类”等",
+          "seed_task_id": "SEED-COM-075",
+          "base_seed_text": "检索PageRank的代表论文，按时间线梳理方法演进，再总结三个研究趋势",
+          "variant_id": 2,
+          "internal_dependency_type": "multi_step",
+          "contains_internal_dependency": true
+        }
+      ],
+      "record_max_query_level": "COMPLEX",
+      "record_max_query_level_id": 4,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "输入只有一个完整查询；若为COMPLEX，query本身已显式给出步骤边界；若为AUTONOMY，query表面简短但需要模型自行规划与推进，因此都不应在顶层拆成多个独立子查询。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "5172cb40345c",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-02502",
+      "case_type": "dependent_single",
+      "input_query": "这件事不用拆开，直接处理：麻烦先计算31乘以26，再把结果写成一句完整中文。",
+      "should_decompose": false,
+      "expected_subquery_count": 1,
+      "dependency_type": "output_reference",
+      "expected_subqueries": [
+        "麻烦先计算31乘以26，再把结果写成一句完整中文"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "麻烦先计算31乘以26，再把结果写成一句完整中文",
+          "query_level": "DIRECT",
+          "query_level_id": 1,
+          "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等，通常可直接回答或做轻量文本/数值处理",
+          "seed_task_id": "SEED-DIR-082",
+          "base_seed_text": "先计算31乘以26，再把结果写成一句完整中文",
+          "variant_id": 3,
+          "internal_dependency_type": "output_reference",
+          "contains_internal_dependency": true
+        }
+      ],
+      "record_max_query_level": "DIRECT",
+      "record_max_query_level_id": 1,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "输入只有一个完整查询；若为COMPLEX，query本身已显式给出步骤边界；若为AUTONOMY，query表面简短但需要模型自行规划与推进，因此都不应在顶层拆成多个独立子查询。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "c5c06ea3ab8d",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-02503",
+      "case_type": "dependent_single",
+      "input_query": "我主要想处理一件文档合规和流程检查相关的事：帮我持续推进合同审核自动化，麻烦你整体推进。",
+      "should_decompose": false,
+      "expected_subquery_count": 1,
+      "dependency_type": "recursive_iteration",
+      "expected_subqueries": [
+        "帮我持续推进合同审核自动化"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "帮我持续推进合同审核自动化",
+          "query_level": "AUTONOMY",
+          "query_level_id": 5,
+          "query_level_desc": "L5-隐式自主查询：query表面目标化、口语化，通常不显式拆步骤，但完成它需要模型自行规划、递归推进、持续监控或动态调整",
+          "seed_task_id": "SEED-AUT-053",
+          "base_seed_text": "帮我持续推进合同审核自动化",
+          "variant_id": 4,
+          "internal_dependency_type": "recursive_iteration",
+          "contains_internal_dependency": true
+        }
+      ],
+      "record_max_query_level": "AUTONOMY",
+      "record_max_query_level_id": 5,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "输入只有一个完整查询；若为COMPLEX，query本身已显式给出步骤边界；若为AUTONOMY，query表面简短但需要模型自行规划与推进，因此都不应在顶层拆成多个独立子查询。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "2f8ea44c474d",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-03501",
+      "case_type": "mixed_boundary",
+      "input_query": "我想把出行、天气和城市活动相关的几件事一起处理：帮我查询上海今天的天气，结果用简洁中文回答；另外麻烦判断是否排队人数超过30人，如果是就生成客服话术，否则说明无需处理；同时能不能帮我查询上海本月最后一天的天气。",
+      "should_decompose": true,
+      "expected_subquery_count": 3,
+      "dependency_type": "none_between_subqueries_with_intra_subquery_dependency",
+      "expected_subqueries": [
+        "帮我查询上海今天的天气，结果用简洁中文回答",
+        "麻烦判断是否排队人数超过30人，如果是就生成客服话术，否则说明无需处理",
+        "能不能帮我查询上海本月最后一天的天气"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "帮我查询上海今天的天气，结果用简洁中文回答",
+          "query_level": "SIMPLE",
+          "query_level_id": 2,
+          "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+          "seed_task_id": "SEED-SIM-021",
+          "base_seed_text": "查询上海今天的天气",
+          "variant_id": 2,
+          "internal_dependency_type": "none",
+          "contains_internal_dependency": false
+        },
+        {
+          "subquery_index": 2,
+          "text": "麻烦判断是否排队人数超过30人，如果是就生成客服话术，否则说明无需处理",
+          "query_level": "BRANCH",
+          "query_level_id": 3,
+          "query_level_desc": "L3-分支逻辑查询：如条件判断、并行分支等，query中通常出现“如果/否则”等分支线索",
+          "seed_task_id": "SEED-BRA-078",
+          "base_seed_text": "判断是否排队人数超过30人，如果是就生成客服话术，否则说明无需处理",
+          "variant_id": 3,
+          "internal_dependency_type": "condition",
+          "contains_internal_dependency": true
+        },
+        {
+          "subquery_index": 3,
+          "text": "能不能帮我查询上海本月最后一天的天气",
+          "query_level": "SIMPLE",
+          "query_level_id": 2,
+          "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+          "seed_task_id": "SEED-SIM-037",
+          "base_seed_text": "查询上海本月最后一天的天气",
+          "variant_id": 4,
+          "internal_dependency_type": "none",
+          "contains_internal_dependency": false
+        }
+      ],
+      "record_max_query_level": "BRANCH",
+      "record_max_query_level_id": 3,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "顶层有多个主题相近但彼此独立的任务，因此需要拆分；其中至少一个子查询内部存在条件、循环、显式多步或自主规划依赖，不能继续作为顶层独立任务拆散。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "7146e0a605c4",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-03502",
+      "case_type": "mixed_boundary",
+      "input_query": "围绕团队协作、指标和运营复盘，请分别处理下面几项：麻烦帮我理顺销售一部下个月的重点工作；顺便能不能帮我先把这句话润色，再翻译成英文：“团队需要更清晰的目标”，结果用简洁中文回答；也请先把这句话润色，再翻译成英文：“请在下周前提交项目总结”，给我一个清晰结论；最后请判断这句话的情感倾向：“请在下周前提交项目总结”，结果用简洁中文回答。",
+      "should_decompose": true,
+      "expected_subquery_count": 4,
+      "dependency_type": "none_between_subqueries_with_intra_subquery_dependency",
+      "expected_subqueries": [
+        "麻烦帮我理顺销售一部下个月的重点工作",
+        "能不能帮我先把这句话润色，再翻译成英文：“团队需要更清晰的目标”，结果用简洁中文回答",
+        "先把这句话润色，再翻译成英文：“请在下周前提交项目总结”，给我一个清晰结论",
+        "请判断这句话的情感倾向：“请在下周前提交项目总结”，结果用简洁中文回答"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "麻烦帮我理顺销售一部下个月的重点工作",
+          "query_level": "AUTONOMY",
+          "query_level_id": 5,
+          "query_level_desc": "L5-隐式自主查询：query表面目标化、口语化，通常不显式拆步骤，但完成它需要模型自行规划、递归推进、持续监控或动态调整",
+          "seed_task_id": "SEED-AUT-061",
+          "base_seed_text": "帮我理顺销售一部下个月的重点工作",
+          "variant_id": 3,
+          "internal_dependency_type": "planning",
+          "contains_internal_dependency": true
+        },
+        {
+          "subquery_index": 2,
+          "text": "能不能帮我先把这句话润色，再翻译成英文：“团队需要更清晰的目标”，结果用简洁中文回答",
+          "query_level": "DIRECT",
+          "query_level_id": 1,
+          "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等，通常可直接回答或做轻量文本/数值处理",
+          "seed_task_id": "SEED-DIR-036",
+          "base_seed_text": "先把这句话润色，再翻译成英文：“团队需要更清晰的目标”",
+          "variant_id": 4,
+          "internal_dependency_type": "output_reference",
+          "contains_internal_dependency": true
+        },
+        {
+          "subquery_index": 3,
+          "text": "先把这句话润色，再翻译成英文：“请在下周前提交项目总结”，给我一个清晰结论",
+          "query_level": "DIRECT",
+          "query_level_id": 1,
+          "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等，通常可直接回答或做轻量文本/数值处理",
+          "seed_task_id": "SEED-DIR-024",
+          "base_seed_text": "先把这句话润色，再翻译成英文：“请在下周前提交项目总结”",
+          "variant_id": 0,
+          "internal_dependency_type": "output_reference",
+          "contains_internal_dependency": true
+        },
+        {
+          "subquery_index": 4,
+          "text": "请判断这句话的情感倾向：“请在下周前提交项目总结”，结果用简洁中文回答",
+          "query_level": "DIRECT",
+          "query_level_id": 1,
+          "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等，通常可直接回答或做轻量文本/数值处理",
+          "seed_task_id": "SEED-DIR-022",
+          "base_seed_text": "判断这句话的情感倾向：“请在下周前提交项目总结”",
+          "variant_id": 1,
+          "internal_dependency_type": "none",
+          "contains_internal_dependency": false
+        }
+      ],
+      "record_max_query_level": "AUTONOMY",
+      "record_max_query_level_id": 5,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "顶层有多个主题相近但彼此独立的任务，因此需要拆分；其中至少一个子查询内部存在条件、循环、显式多步或自主规划依赖，不能继续作为顶层独立任务拆散。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "399ac88329de",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-03503",
+      "case_type": "mixed_boundary",
+      "input_query": "我这边有几件都和出行、天气和城市活动相关的事情想一起确认：能不能帮我查询上海本周六的天气，并根据天气给出穿衣建议，给我一个清晰结论；另外查询上海未来三天的天气，输出要点即可；同时请查询广州下周三的天气；还有帮我纠正这句话的错别字：“今天的风比昨天更大”，结果用简洁中文回答。",
+      "should_decompose": true,
+      "expected_subquery_count": 4,
+      "dependency_type": "none_between_subqueries_with_intra_subquery_dependency",
+      "expected_subqueries": [
+        "能不能帮我查询上海本周六的天气，并根据天气给出穿衣建议，给我一个清晰结论",
+        "查询上海未来三天的天气，输出要点即可",
+        "请查询广州下周三的天气",
+        "帮我纠正这句话的错别字：“今天的风比昨天更大”，结果用简洁中文回答"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "能不能帮我查询上海本周六的天气，并根据天气给出穿衣建议，给我一个清晰结论",
+          "query_level": "SIMPLE",
+          "query_level_id": 2,
+          "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+          "seed_task_id": "SEED-SIM-026",
+          "base_seed_text": "查询上海本周六的天气，并根据天气给出穿衣建议",
+          "variant_id": 4,
+          "internal_dependency_type": "causal_or_result_reference",
+          "contains_internal_dependency": true
+        },
+        {
+          "subquery_index": 2,
+          "text": "查询上海未来三天的天气，输出要点即可",
+          "query_level": "SIMPLE",
+          "query_level_id": 2,
+          "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+          "seed_task_id": "SEED-SIM-039",
+          "base_seed_text": "查询上海未来三天的天气",
+          "variant_id": 0,
+          "internal_dependency_type": "none",
+          "contains_internal_dependency": false
+        },
+        {
+          "subquery_index": 3,
+          "text": "请查询广州下周三的天气",
+          "query_level": "SIMPLE",
+          "query_level_id": 2,
+          "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+          "seed_task_id": "SEED-SIM-055",
+          "base_seed_text": "查询广州下周三的天气",
+          "variant_id": 1,
+          "internal_dependency_type": "none",
+          "contains_internal_dependency": false
+        },
+        {
+          "subquery_index": 4,
+          "text": "帮我纠正这句话的错别字：“今天的风比昨天更大”，结果用简洁中文回答",
+          "query_level": "DIRECT",
+          "query_level_id": 1,
+          "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等，通常可直接回答或做轻量文本/数值处理",
+          "seed_task_id": "SEED-DIR-037",
+          "base_seed_text": "纠正这句话的错别字：“今天的风比昨天更大”",
+          "variant_id": 2,
+          "internal_dependency_type": "none",
+          "contains_internal_dependency": false
+        }
+      ],
+      "record_max_query_level": "SIMPLE",
+      "record_max_query_level_id": 2,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "顶层有多个主题相近但彼此独立的任务，因此需要拆分；其中至少一个子查询内部存在条件、循环、显式多步或自主规划依赖，不能继续作为顶层独立任务拆散。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "379e0e5d5500",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-04501",
+      "case_type": "single_atomic",
+      "input_query": "我只有一个小需求：帮我先把这句话润色，再翻译成英文：“用户增长在周末明显放缓”，给我一个清晰结论。",
+      "should_decompose": false,
+      "expected_subquery_count": 1,
+      "dependency_type": "single_query_no_decomposition",
+      "expected_subqueries": [
+        "帮我先把这句话润色，再翻译成英文：“用户增长在周末明显放缓”，给我一个清晰结论"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "帮我先把这句话润色，再翻译成英文：“用户增长在周末明显放缓”，给我一个清晰结论",
+          "query_level": "DIRECT",
+          "query_level_id": 1,
+          "query_level_desc": "L1-单步直接查询：不依赖知识库、数据库、任务规划等，通常可直接回答或做轻量文本/数值处理",
+          "seed_task_id": "SEED-DIR-048",
+          "base_seed_text": "先把这句话润色，再翻译成英文：“用户增长在周末明显放缓”",
+          "variant_id": 2,
+          "internal_dependency_type": "output_reference",
+          "contains_internal_dependency": true
+        }
+      ],
+      "record_max_query_level": "DIRECT",
+      "record_max_query_level_id": 1,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "输入本身只有一个原子查询，不应为了格式、礼貌表达或轻量后处理进行顶层拆分；其级别在单个子查询上标注。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "e1de3600a572",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-04502",
+      "case_type": "single_atomic",
+      "input_query": "完整处理这个请求：麻烦查询上海本月最后一天的天气，给我一个清晰结论。",
+      "should_decompose": false,
+      "expected_subquery_count": 1,
+      "dependency_type": "single_query_no_decomposition",
+      "expected_subqueries": [
+        "麻烦查询上海本月最后一天的天气，给我一个清晰结论"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "麻烦查询上海本月最后一天的天气，给我一个清晰结论",
+          "query_level": "SIMPLE",
+          "query_level_id": 2,
+          "query_level_desc": "L2-单次调用查询：如RAG、ChatBI、一次检索/查询或简单顺序调用",
+          "seed_task_id": "SEED-SIM-037",
+          "base_seed_text": "查询上海本月最后一天的天气",
+          "variant_id": 3,
+          "internal_dependency_type": "none",
+          "contains_internal_dependency": false
+        }
+      ],
+      "record_max_query_level": "SIMPLE",
+      "record_max_query_level_id": 2,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "输入本身只有一个原子查询，不应为了格式、礼貌表达或轻量后处理进行顶层拆分；其级别在单个子查询上标注。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "3754934671f2",
+      "split": "test"
+    },
+    {
+      "id": "ORCH-V3-04503",
+      "case_type": "single_atomic",
+      "input_query": "完整处理这个请求：能不能帮我找出BERT相关论文中的常用数据集，逐个比较任务设置并归纳评测差异，结果用简洁中文回答。",
+      "should_decompose": false,
+      "expected_subquery_count": 1,
+      "dependency_type": "single_query_no_decomposition",
+      "expected_subqueries": [
+        "能不能帮我找出BERT相关论文中的常用数据集，逐个比较任务设置并归纳评测差异，结果用简洁中文回答"
+      ],
+      "expected_subtasks": [
+        {
+          "subquery_index": 1,
+          "text": "能不能帮我找出BERT相关论文中的常用数据集，逐个比较任务设置并归纳评测差异，结果用简洁中文回答",
+          "query_level": "COMPLEX",
+          "query_level_id": 4,
+          "query_level_desc": "L4-显式多步调用查询：query中已经给出较明确的步骤、顺序、循环或组合线索，如“先…再…最后…/逐个/逐日/按…分类”等",
+          "seed_task_id": "SEED-COM-064",
+          "base_seed_text": "找出BERT相关论文中的常用数据集，逐个比较任务设置并归纳评测差异",
+          "variant_id": 4,
+          "internal_dependency_type": "iteration",
+          "contains_internal_dependency": true
+        }
+      ],
+      "record_max_query_level": "COMPLEX",
+      "record_max_query_level_id": 4,
+      "level_annotation_policy": "查询级别在子任务拆解完成后，对每个 expected_subtask 单独判断；record_max_query_level 只是辅助统计字段。COMPLEX表示query中已有明确步骤提示，AUTONOMY表示query表面简单但需要模型自主规划。",
+      "rationale": "输入本身只有一个原子查询，不应为了格式、礼貌表达或轻量后处理进行顶层拆分；其级别在单个子查询上标注。",
+      "language": "zh-CN",
+      "generation_method": "500个子任务种子（每级100条）× 主题相近配对 × 自然语言连接词拼接；强化COMPLEX显式步骤与AUTONOMY隐式自主规划的区分",
+      "source_family": "synthetic_orchestrator_decomposition_v3_theme_aligned",
+      "query_hash": "d171a52d72ee",
+      "split": "test"
+    }
+  ]
+}
